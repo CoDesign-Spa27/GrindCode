@@ -19,6 +19,9 @@ export function Header(){
       >Sign In</Button>)
   }
   </div>
- 
+ <div>
+  {session.data?.user?.name}
+
+ </div>
  </header>
 }

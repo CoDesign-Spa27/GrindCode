@@ -3,12 +3,9 @@ import { SessionProvider } from "next-auth/react"
 import { ThemeProvider } from "next-themes"
 import { ReactNode } from "react";
 
-interface Props{
-  children:ReactNode
-}
+ 
 
-
-export function Providers(props:Props) {
+export function Providers({ children }: { children: ReactNode }) {
     return <SessionProvider >
     <ThemeProvider
           attribute="class"
@@ -17,7 +14,7 @@ export function Providers(props:Props) {
           disableTransitionOnChange
         >
            
-          {props.children}
+          {children}
         </ThemeProvider>
     </SessionProvider>
 }
