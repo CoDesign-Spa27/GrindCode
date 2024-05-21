@@ -80,12 +80,13 @@ export const testing=pgTable("testing",{
     .default(sql`gen_random_uuid()`)
     .notNull()
     .primaryKey(),
-    userId: text("userId")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-      name: text("name").notNull(),
-    language:text("language").notNull(),
-    githubRepo: text("githubRepo")
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  description: text("description"),
+  tags: text("tags").notNull(),
+  githubRepo: text("githubRepo"),
   })
    // exporting type of room
    export type Room=typeof room.$inferSelect;
