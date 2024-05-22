@@ -63,7 +63,7 @@ export function Header() {
       <div className="flex items-center justify-between">
         <Link href="/">
           <div className="font-extrabold text-2xl tracking-wide">
-            CodeForge
+            GrindCode
           </div>
         </Link>
         <div className="flex gap-10 items-center">

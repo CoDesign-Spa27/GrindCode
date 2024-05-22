@@ -113,8 +113,7 @@ export function CreateRoomForm(){
                     <Input {...field} />
                   </FormControl>
                   <FormDescription>
-                  What tags you are using for Programming
-                  </FormDescription>
+                  List of your programming languages,framework, libraries and anything related to your project so people can find your content</FormDescription>
                   <FormMessage />
                 </FormItem>
 
