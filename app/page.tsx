@@ -69,7 +69,12 @@ function RoomCard({ room }: { room: Room }) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-      <div className="flex gap-2">
+        <h1 className="pb-3">Tags :</h1>
+      <TagList tags={splitTags(room.tags)!} />
+        
+      </CardContent>
+      <CardContent>
+     <div className="flex gap-2">
         {room?.githubRepo && (
           <Link
         
@@ -81,10 +86,6 @@ function RoomCard({ room }: { room: Room }) {
 ) 
     }Github 
         </div>
-        
-      </CardContent>
-      <CardContent>
-     <TagList tags={splitTags(room.tags)!} />
       </CardContent>
       <CardFooter>
         <Button asChild><Link

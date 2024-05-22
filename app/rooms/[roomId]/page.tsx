@@ -1,7 +1,7 @@
 import { TagList, splitTags } from "@/components/tags-list";
-import { Badge } from "@/components/ui/badge";
 import { getRoom } from "@/data-access/room";
 import { Link, Github } from "lucide-react";
+import { GrindCodeVideo } from "./video-player";
 
 export default async function RoomPage(props : {params:{roomId:string}}){
 const roomId=props.params.roomId;
@@ -17,7 +17,7 @@ if(!room){
     return   <div className="grid grid-cols-4 min-h-full">
 <div className="col-span-3 p-4 pr-2 ">
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4">
-        Video Player
+        <GrindCodeVideo room={room} />
     </div>
     </div>
     
