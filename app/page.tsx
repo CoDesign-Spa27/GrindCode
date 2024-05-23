@@ -1,4 +1,5 @@
-import { TagList, splitTags } from "@/components/tags-list";
+import { TagList } from "@/components/tags-list";
+import { splitTags } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Card,

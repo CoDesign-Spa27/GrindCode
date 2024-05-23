@@ -18,9 +18,9 @@ import { useRouter } from "next/navigation"
  
 const formSchema = z.object({
    name: z.string().min(2).max(50),
-   description: z.string().min(2).max(50),
+   description: z.string().min(2).max(300),
    githubRepo: z.string().min(2).max(50),
-   tags: z.string().min(2).max(50)
+   tags: z.string().min(2).max(300)
 })
 
 export function CreateRoomForm(){

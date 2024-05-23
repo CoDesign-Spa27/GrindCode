@@ -1,5 +1,6 @@
-import { TagList, splitTags } from "@/components/tags-list";
+import { TagList  } from "@/components/tags-list";
 import { getRoom } from "@/data-access/room";
+import { splitTags } from "@/lib/utils";
 import { Link, Github } from "lucide-react";
 import { GrindCodeVideo } from "./video-player";
 
