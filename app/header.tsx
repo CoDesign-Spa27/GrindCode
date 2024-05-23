@@ -43,7 +43,9 @@ export function AccountDropdown() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {isLoggedIn ? (
-          <DropdownMenuItem onClick={() => signOut()}>
+          <DropdownMenuItem onClick={() => signOut({
+            callbackUrl:"/"
+          })}>
             <LogOut className="m-2 w-4" />
             Sign Out
           </DropdownMenuItem>

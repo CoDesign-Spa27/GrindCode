@@ -4,6 +4,7 @@ import { Room } from '@/db/schema';
 import {
   Call,
   CallControls,
+  CallParticipantsList,
   SpeakerLayout,
   StreamCall,
   StreamTheme,
@@ -13,14 +14,17 @@ import {
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import {generateTokenAction } from './action';
+import { useRouter } from 'next/navigation';
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_KEY!;
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDdiNTI0NTgtYzZlZS00MTU4LWE1MWQtZDM3YjE1NWI4MmY3In0.L8b5COLStdfvmAeOIdWLbfNr-S6fDxf6F68gSjZPRiY';
+
 
 export const GrindCodeVideo = ({ room }: { room: Room }) => {
   const { data: session, status } = useSession();
   const [client, setClient] = useState<StreamVideoClient | null>(null);
   const [call, setCall] = useState<Call | null>(null);
+
+  const router=useRouter();
 
   useEffect(() => {
     if (status !== 'authenticated' || !session || !room) return;
@@ -31,6 +35,8 @@ export const GrindCodeVideo = ({ room }: { room: Room }) => {
       apiKey,
       user: {
         id: userId,
+        name:session.user.name ?? "Unknown user",
+        image:session.user.image ?? undefined,
       },
      tokenProvider:()=>generateTokenAction()
 
@@ -42,9 +48,14 @@ export const GrindCodeVideo = ({ room }: { room: Room }) => {
     call.join({ create: true });
     setCall(call);
 
+    
+
     return () => {
-      call.leave();
+
+      call.leave().then(()=>{
       client.disconnectUser();
+
+      }).catch(console.error)
     };
   }, [session, status, room]);
 
@@ -57,8 +68,13 @@ export const GrindCodeVideo = ({ room }: { room: Room }) => {
       <StreamTheme>
         <StreamCall call={call}>
           <SpeakerLayout />
-          <CallControls />
-        </StreamCall>
+          <CallControls onLeave={()=>{
+router.push('/');
+          }} />
+          <CallParticipantsList 
+          onClose={()=>undefined}
+          />
+        </StreamCall> 
       </StreamTheme>
     </StreamVideo>
   );

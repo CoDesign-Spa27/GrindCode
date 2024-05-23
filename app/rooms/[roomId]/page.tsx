@@ -14,14 +14,14 @@ if(!room){
         <h1>No room of this Id found</h1>
     </div>
 }
-    return   <div className="grid grid-cols-4 min-h-full">
-<div className="col-span-3 p-4 pr-2 ">
+    return   <div className="grid md:grid-cols-4 grid-cols-1  min-h-full">
+<div className="sm:col-span-3 col-span-1 p-4 pr-2 ">
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4">
         <GrindCodeVideo room={room} />
     </div>
     </div>
     
-<div className="col-span-1 p-4 pl-2">
+<div className="sm:col-span-1 col-span-1 p-4 pl-2">
     <div
     className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 flex flex-col gap-4"
     >

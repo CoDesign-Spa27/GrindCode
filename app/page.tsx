@@ -12,10 +12,15 @@ import { getRooms } from "@/data-access/room";
 import { Room } from "@/db/schema";
 import { Github } from "lucide-react";
 import Link from "next/link";
+import { SearchBar } from "./search-bar";
 
-export default async function Home() {
+export default async function Home({searchParams}: {
+  searchParams: {
+    search:string;
+  }
+}) {
   // Fetching the rooms data from the database
-  const items = await getRooms();
+  const items = await getRooms(searchParams.search);
 
   return (
     <main className="flex flex-col items-center justify-between">
@@ -29,7 +34,7 @@ export default async function Home() {
               Realms!
             </span>
           </div>
-          <div className="py-8 text-center text-lg">
+          <div className="py-8 text-center px-5 md:text-lg">
             Code Together, Innovate Forever: Join Tech-Savvy Rooms for Every
             Stack!
           </div>
@@ -48,7 +53,11 @@ export default async function Home() {
         </div>
       </div>
        <div className="container mx-auto">
+        <div className="w-full pb-4"> 
         <h1 className="md:text-4xl text-2xl font-bold text-center py-4">Live Forges</h1>
+ 
+ <SearchBar />
+ </div>
         <div className="grid md:grid-cols-3  gap-4">
           {items.map((room) => (
             <RoomCard key={room.id} room={room} />
@@ -74,7 +83,7 @@ function RoomCard({ room }: { room: Room }) {
         
       </CardContent>
       <CardContent>
-     <div className="flex gap-2">
+     <div className="flex text-sm gap-2">
         {room?.githubRepo && (
           <Link
         
