@@ -21,7 +21,7 @@ const formSchema = z.object({
     search: z.string().min(0).max(50),
    
  })
-export function SearchBar(){
+export function BrowseSearchBar(){
  
  const router =useRouter()
 const query=useSearchParams();
@@ -41,7 +41,7 @@ const query=useSearchParams();
 
      async function onSubmit(values: z.infer<typeof formSchema>) {
 if(values.search){  
-   router.push(`/your-rooms?search=${values.search}`)
+   router.push(`/browse?search=${values.search}`)
 }
       else {
         router.push("/")

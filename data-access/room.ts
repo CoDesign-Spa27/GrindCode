@@ -5,7 +5,6 @@ import { getSession } from '@/lib/auth';
 import { unstable_noStore } from 'next/cache';
 
 export async function getRooms(search:string | undefined){
-    unstable_noStore();
 
  
     const where=search ? like(room.tags,`%${search}%`) : undefined;
@@ -17,7 +16,6 @@ export async function getRooms(search:string | undefined){
 }
 
 export async function getUserRooms(){
-    
 
     const session = await getSession();
   
