@@ -9,7 +9,7 @@ return   <div>
 {tags.map((tag) =>
  ( <Badge
  onClick={()=>{
-    router.push(`/?search=${tag}`);
+    router.push(`/your-rooms?search=${tag}`);
  }
 
  }

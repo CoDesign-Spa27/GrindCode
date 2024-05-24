@@ -3,11 +3,13 @@ import { getRoom } from "@/data-access/room";
 import { splitTags } from "@/lib/utils";
 import { Link, Github } from "lucide-react";
 import { GrindCodeVideo } from "./video-player";
+import { unstable_noStore } from "next/cache";
 
 export default async function RoomPage(props : {params:{roomId:string}}){
 const roomId=props.params.roomId;
 
 
+unstable_noStore();
 const room=await getRoom(roomId)
 
 if(!room){

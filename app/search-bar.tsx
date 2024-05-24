@@ -41,7 +41,7 @@ const query=useSearchParams();
 
      async function onSubmit(values: z.infer<typeof formSchema>) {
 if(values.search){  
-   router.push(`/?search=${values.search}`)
+   router.push(`/your-rooms?search=${values.search}`)
 }
       else {
         router.push("/")
@@ -56,7 +56,7 @@ if(values.search){
               name="search"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Search</FormLabel>
+                  <FormLabel className="text-sm">Search</FormLabel>
                   <FormControl>
                     <Input 
                     className="sm:w-[500px] w-[130%] "

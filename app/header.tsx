@@ -65,9 +65,16 @@ export function Header() {
       <div className="flex items-center justify-between">
         <Link href="/">
           <div className="font-extrabold text-2xl tracking-wide">
-            GrindCode
+            Grind <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Code</span>
           </div>
         </Link>
+        <nav>
+          <Link
+          className="hover:underline"
+          href="/your-rooms">
+           My Rooms
+          </Link>
+        </nav>
         <div className="flex gap-10 items-center">
       
           <ModeToggle />
