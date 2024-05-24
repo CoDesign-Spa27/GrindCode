@@ -21,5 +21,5 @@ throw new Error("User not authorized");
 
 await deleteRoom(roomId)
 
-revalidatePath("/your-rooms")
+revalidatePath( "/your-rooms")
 }

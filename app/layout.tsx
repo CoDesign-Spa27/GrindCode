@@ -26,7 +26,7 @@ export default function RootLayout({
         color=" #D95BFF"
         showSpinner={true}
         crawlSpeed={250}
-        speed={500}
+        speed={100}
         shadow="0 0 10px #2299DD,0 0 5px #2299DD"
        
         showAtBottom={false}

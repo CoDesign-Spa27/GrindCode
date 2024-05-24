@@ -1,4 +1,5 @@
 "use client";
+import CodeSvg from '../public/code.svg'
 
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
@@ -15,9 +16,10 @@ import { LogOut } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import Link from "next/link";
 
+
 export function AccountDropdown() {
   const { data: session, status } = useSession();
-  const isLoggedIn = status === "authenticated";
+  const isLoggedIn = status ==="authenticated";
 
   if (status === "loading") {
     return <Button>Loading...</Button>;
@@ -60,22 +62,40 @@ export function AccountDropdown() {
 }
 
 export function Header() {
+    
+const { data: session, status } = useSession();
+const isLoggedIn = status ==="authenticated";
   return (
     <header className="dark:bg-gray-900 bg-gray-200 mx-auto px-6 py-2">
       <div className="flex items-center justify-between">
         <Link href="/">
-          <div className="font-extrabold text-2xl tracking-wide">
-            Grind <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Code</span>
+          <div className="font-extrabold flex items-center gap-1 text-2xl tracking-wide">
+          <CodeSvg  />   Grind<span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Code</span>
           </div>
         </Link>
-        <nav>
+        <nav className='hidden sm:block'>
+
+          {isLoggedIn && 
+         (   
+        
+         <div className='flex gap-2'>
+           <Link
+            className="hover:underline"
+            href="/your-rooms">
+             My Rooms
+            </Link> 
+
           <Link
-          className="hover:underline"
-          href="/your-rooms">
-           My Rooms
-          </Link>
+          className='hover:underline'
+          href="/browse">
+            Browse
+          </Link>  
+         </div>
+          )
+          }
+        
         </nav>
-        <div className="flex gap-10 items-center">
+        <div className=" hidden sm:flex gap-10 items-center">
       
           <ModeToggle />
           <AccountDropdown />

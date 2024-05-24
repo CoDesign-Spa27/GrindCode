@@ -1,12 +1,12 @@
 import { getRooms, getUserRooms } from "@/data-access/room";
 import Link from "next/link";
-import { SearchBar } from "../search-bar";
+import { SearchBar } from "../browse/search-bar";
 import { UserRoomCard } from "@/app/your-rooms/user-room-card";
 import { Button } from "@/components/ui/button";
 import { CirclePlus } from "lucide-react";
 import { unstable_noStore } from "next/cache";
 
-export default async function YourRoomsPage() {
+export default async function YourRoomPage() {
   // Fetching the rooms data from the database
   unstable_noStore();
 
