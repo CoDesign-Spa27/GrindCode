@@ -1,5 +1,5 @@
  import  { db } from '@/db';
-import { room } from '@/db/schema';
+import { Room, room } from '@/db/schema';
 import { eq, like } from 'drizzle-orm';
 import { getSession } from '@/lib/auth';
 import { unstable_noStore } from 'next/cache';
@@ -42,3 +42,25 @@ where:eq(room.id,roomId)
 export async function deleteRoom(roomId: string){
     await db.delete(room).where(eq(room.id,roomId));
 }
+
+export async function createRoom(
+
+    roomData:Omit<Room,"id"|"userId">,
+    userId:string
+
+){
+     await db.insert(room).values({
+        ...roomData,userId
+     });
+}
+
+
+
+export async function editRoom(roomData: Room) {
+    const updated = await db
+      .update(room)
+      .set(roomData)
+      .where(eq(room.id, roomData.id))
+      .returning();
+    return updated[0];
+  }

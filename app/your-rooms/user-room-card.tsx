@@ -1,7 +1,7 @@
 "use client"
 import { Room } from "@/db/schema";
 import { splitTags } from "@/lib/utils";
-import { Github, Trash } from "lucide-react";
+import { Github, PencilIcon, Trash } from "lucide-react";
 import { TagList } from "../../components/tags-list";
 import { Button } from "../../components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../../components/ui/card";
@@ -23,7 +23,18 @@ import { deleteRoomAction } from "./action";
 export function UserRoomCard({ room }: { room: Room }) {
     return (
       <Card>
-        <CardHeader>
+        <CardHeader className="relative" >
+
+          <Link
+          
+          href={`/edit-room/${room.id}`}>
+          <Button
+          size="icon"
+          className="absolute top-4 right-3">
+            <PencilIcon  className="w-4 h-4"/>
+          </Button>
+          </Link>
+       
           <CardTitle>{room.name}</CardTitle>
           <CardDescription>
             {room.description}
