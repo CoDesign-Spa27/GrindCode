@@ -6,9 +6,8 @@ import { CirclePlus } from "lucide-react";
 import { unstable_noStore } from "next/cache";
 
 export default async function YourRoomPage() {
-  // Fetching the rooms data from the database
+  
   unstable_noStore();
-
   const items = await getUserRooms();
 
   return (
