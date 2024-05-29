@@ -5,6 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
  
 import { Providers } from "./provider";
 import { Header } from "./header";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>  
       <Providers >
+        <Toaster />
         <NextTopLoader  
         color=" #D95BFF"
         showSpinner={true}
@@ -33,7 +35,6 @@ export default function RootLayout({
         />
          <Header />
         {children}
-
       </Providers>
        </body>
     </html>

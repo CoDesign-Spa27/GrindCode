@@ -15,6 +15,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { createRoomAction } from "./actions"
 import { useRouter } from "next/navigation"
+import { toast } from "@/components/ui/use-toast"
+import { room } from "@/db/schema"
  
 const formSchema = z.object({
    name: z.string().min(2).max(50),
@@ -38,7 +40,12 @@ export function CreateRoomForm(){
   
      async function onSubmit(values: z.infer<typeof formSchema>) {
    await createRoomAction(values);
-   router.push('/')
+    toast(
+    {
+      title:"Room Created",
+      description:"Your Room is Created"    }
+    )
+   router.push(`/rooms/${room.id}`)
       }
 
       return ( 

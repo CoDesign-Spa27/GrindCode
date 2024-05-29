@@ -2,7 +2,6 @@
 import { Room, room } from '@/db/schema';
 import { eq, like } from 'drizzle-orm';
 import { getSession } from '@/lib/auth';
-import { unstable_noStore } from 'next/cache';
 
 export async function getRooms(search:string | undefined){
 
@@ -44,16 +43,16 @@ export async function deleteRoom(roomId: string){
 }
 
 export async function createRoom(
-
-    roomData:Omit<Room,"id"|"userId">,
-    userId:string
-
-){
-     await db.insert(room).values({
-        ...roomData,userId
-     });
-}
-
+    roomData: Omit<Room, "id" | "userId">,
+    userId: string
+  ) {
+    const inserted = await db
+      .insert(room)
+      .values({ ...roomData, userId })
+      .returning();
+    return inserted[0];
+  }
+  
 
 
 export async function editRoom(roomData: Room) {

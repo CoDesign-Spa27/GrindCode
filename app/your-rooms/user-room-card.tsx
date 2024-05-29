@@ -18,10 +18,23 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { deleteRoomAction } from "./action";
+import { toast } from "@/components/ui/use-toast";
 
 
 export function UserRoomCard({ room }: { room: Room }) {
-    return (
+
+
+  const handleDeleteButton =()=>{
+    deleteRoomAction(room.id)
+
+    toast({
+      title:"Room Deleted",
+      description:"Your Room has been  successfully deleted"
+    })
+
+  }
+
+  return (
       <Card>
         <CardHeader className="relative" >
 
@@ -90,7 +103,7 @@ variant='destructive'
   
       <AlertDialogAction
       onClick={()=>{
-    deleteRoomAction(room.id)
+handleDeleteButton()
       }}
       >Yes, deleted</AlertDialogAction>
     </AlertDialogFooter>
