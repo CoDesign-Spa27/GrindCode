@@ -98,13 +98,13 @@ const handleNav=()=>{
         
          <div className='flex gap-2'>
            <Link
-            className="dark:text-white hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2    dark:hover:bg-gray-100 dark:focus:ring-gray-700 dark:border-gray-700 dark:hover:text-black"
+            className="dark:text-white hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2    dark:hover:bg-gray-100 dark:focus:ring-gray-700 transition-all duration-300 ease-out dark:border-gray-700 dark:hover:text-black"
             href="/your-rooms">
              My Rooms
             </Link> 
 
           <Link
-          className='dark:text-white  hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:hover:text-black  dark:hover:bg-gray-100 dark:focus:ring-gray-700 dark:border-gray-700'
+          className='dark:text-white  hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:hover:text-black  transition-all duration-300 ease-out dark:hover:bg-gray-100 dark:focus:ring-gray-700 dark:border-gray-700'
           href="/browse">
             Browse
           </Link>  
