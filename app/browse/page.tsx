@@ -35,7 +35,7 @@ export default async function Browse({searchParams}: {
  <BrowseSearchBar />
  </div>
        
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid  md:grid-cols-3 gap-4">
         {rooms.map((room) => {
           return <RoomCard key={room.id} room={room} />;
         })}
