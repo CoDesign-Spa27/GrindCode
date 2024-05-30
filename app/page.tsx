@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import Balancer from 'react-wrap-balancer'
- 
 
 export default function LandingPage(){
   
@@ -19,9 +18,10 @@ export default function LandingPage(){
   <section
       className="pt-16 w-full  md:pt-48"
     >
- 
+
       
             <div className="container flex flex-col items-center gap-6 text-center">
+    
          
         
         <h1
