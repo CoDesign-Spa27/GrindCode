@@ -7,7 +7,6 @@ import { revalidatePath, unstable_noStore } from "next/cache";
 import { createRoom } from "@/data-access/room";
 
 export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
-  unstable_noStore();
     const session =await getSession();
    
  
@@ -16,9 +15,11 @@ export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
       return;  
     }
  
-   await createRoom(roomData,session.user.id)
+const room=   await createRoom(roomData,session.user.id)
 
-   revalidatePath("/")
-    
+   revalidatePath("/browse")
+   
+   return room;
+
   }
   
