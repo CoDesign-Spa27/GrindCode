@@ -157,11 +157,11 @@ const handleNav=()=>{
       <div className='flex flex-col
       gap-5
       '>
-        <Link href="/your-rooms">
+        <Link onClick={handleNav} href="/your-rooms">
       <div className='hover:underline'>Your rooms</div>
       </Link>
 
-<Link href='/browse'>
+<Link onClick={handleNav} href='/browse'>
 <div className='hover:underline'>Browse</div> 
 
 </Link>

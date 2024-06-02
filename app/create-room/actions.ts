@@ -1,6 +1,6 @@
 'use server'
 
-import { Room, db,room } from "@/db/schema";
+import { Room} from "@/db/schema";
  
 import { getSession } from "../../lib/auth";
 import { revalidatePath, unstable_noStore } from "next/cache";
