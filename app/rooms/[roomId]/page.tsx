@@ -1,13 +1,15 @@
 import { TagList } from "@/components/tags-list";
-import { getRoom } from "@/data-access/room";
+import  {getRoom}  from "@/data-access/room";
 import { splitTags } from "@/lib/utils";
 import { Link, Github } from "lucide-react";
 import { GrindCodeVideo } from "./video-player";
+ 
 
 export default async function RoomPage({ params }: { params: { roomId: string } }) {
   const { roomId } = params;
 
   const room = await getRoom(roomId);
+ 
 
   if (!room) {
     return (
@@ -18,6 +20,9 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
   }
 
   return (
+
+  
+
     <div className="grid md:grid-cols-4 grid-cols-1 min-h-full">
       <div className="sm:col-span-3 col-span-1 p-4 pr-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4">

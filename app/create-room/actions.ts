@@ -3,7 +3,7 @@
 import { Room} from "@/db/schema";
  
 import { getSession } from "../../lib/auth";
-import { revalidatePath, unstable_noStore } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { createRoom } from "@/data-access/room";
 
 export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
@@ -15,7 +15,7 @@ export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
       return;  
     }
  
-const room=   await createRoom(roomData,session.user.id)
+const room = await createRoom(roomData,session.user.id)
 
    revalidatePath("/browse")
    

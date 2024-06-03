@@ -1,7 +1,9 @@
- import  { db } from '@/db';
+
+import  { db } from '@/db';
 import { Room, room } from '@/db/schema';
 import { eq, like } from 'drizzle-orm';
 import { getSession } from '@/lib/auth';
+ 
 
 export async function getRooms(search:string | undefined){
 
@@ -30,12 +32,17 @@ export async function getUserRooms(){
 
 
 export async function getRoom(roomId: string){
-
-
-    return await db.query.room.findFirst({
-where:eq(room.id,roomId)
-    });
    
+try {
+   
+  return await db.query.room.findFirst({
+    where:eq(room.id,roomId)
+        });
+
+ }catch (err) {
+  console.log(err)
+}
+
 }
 
 export async function deleteRoom(roomId: string){
