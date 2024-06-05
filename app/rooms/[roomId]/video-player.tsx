@@ -23,7 +23,7 @@ export const GrindCodeVideo = ({ room }: { room: Room }) => {
   const { data: session, status } = useSession();
   const [client, setClient] = useState<StreamVideoClient | null>(null);
   const [call, setCall] = useState<Call | null>(null);
-
+ 
   const router=useRouter();
 
   useEffect(() => {

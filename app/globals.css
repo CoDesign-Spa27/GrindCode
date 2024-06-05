@@ -2,6 +2,37 @@
   @tailwind components;
   @tailwind utilities;
 
+  @layer base, theme;
+@import 'stream-chat-react/dist/css/v2/index.css';
+
+  @layer theme {
+    .str-chat__theme-custom {
+      
+      --str-chat__primary-color: #009688;
+      --str-chat__active-primary-color: #004d40;
+      --str-chat__surface-color: #f5f5;
+      --str-chat__secondary-surface-color: rgb(228, 0, 0);
+      --str-chat__primary-surface-color: #e0f2f1;
+      --str-chat__primary-surface-color-low-emphasis: #edf7f7;
+      --str-chat__border-radius-circle: 6px;
+    }
+  }
+
+ 
+
+
+  .str-chat__channel-list {
+    width: 30%;
+  }
+  .str-chat__channel {
+    width: 100%;
+  }
+  .str-chat__channel {
+    height:65%;
+  }
+  .str-chat__thread {
+    width: 45%;
+  }
   @layer base {
     :root {
       --background: 0 0% 100%;

@@ -3,6 +3,7 @@ import  {getRoom}  from "@/data-access/room";
 import { splitTags } from "@/lib/utils";
 import { Link, Github } from "lucide-react";
 import { GrindCodeVideo } from "./video-player";
+import ChatComponent from "@/components/chat/ChatComponent";
  
 
 export default async function RoomPage({ params }: { params: { roomId: string } }) {
@@ -28,10 +29,7 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4">
           <GrindCodeVideo room={room} />
         </div>
-      </div>
-
-      <div className="sm:col-span-1 col-span-1 p-4 pl-2">
-        <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 flex flex-col gap-4">
+        <div className="rounded-lg  border bg-card text-card-foreground shadow-sm my-5 p-4 flex flex-col gap-4">
           <h1 className="font-bold capitalize text-xl">{room?.name}</h1>
           <p className="text-base text-gray-400">{room?.description}</p>
 
@@ -46,6 +44,11 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
             Github
           </div>
         </div>
+      </div>
+
+      <div className="sm:col-span-1 col-span-1 p-4 pl-2">
+       
+        <ChatComponent room={room} />
         
       </div>
     </div>
