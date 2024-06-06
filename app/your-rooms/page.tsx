@@ -4,7 +4,7 @@ import { UserRoomCard } from "@/app/your-rooms/user-room-card";
 import { Button } from "@/components/ui/button";
 import { CirclePlus } from "lucide-react";
 import { unstable_noStore } from "next/cache";
-
+ 
 export default async function YourRoomPage() {
   
   unstable_noStore();
@@ -31,7 +31,21 @@ export default async function YourRoomPage() {
           {items.map((room) => (
             <UserRoomCard key={room.id} room={room} />
           ))}
+        </div> 
+
+        {items.length === 0 && (
+        <div className="flex flex-col gap-4 justify-center items-center mt-24">
+ 
+ <div className="flex justify-center mt-4">
+            <img src="/computer.gif" className=" h-32 w-32" alt="Example GIF" />
+          </div>
+          <h2 className="text-2xl">You have no rooms !</h2>
+
+          <Button asChild>
+            <Link href="/create-room">Create Room</Link>
+          </Button>
         </div>
+      )}
         </div>
     </main>
   );

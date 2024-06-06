@@ -1,16 +1,14 @@
 import { TagList } from "@/components/tags-list";
-import  {getRoom}  from "@/data-access/room";
+import { getRoom } from "@/data-access/room";
 import { splitTags } from "@/lib/utils";
 import { Link, Github } from "lucide-react";
 import { GrindCodeVideo } from "./video-player";
 import ChatComponent from "@/components/chat/ChatComponent";
- 
 
 export default async function RoomPage({ params }: { params: { roomId: string } }) {
   const { roomId } = params;
 
   const room = await getRoom(roomId);
- 
 
   if (!room) {
     return (
@@ -21,15 +19,16 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
   }
 
   return (
-
-  
-
     <div className="grid md:grid-cols-4 grid-cols-1 min-h-full">
       <div className="sm:col-span-3 col-span-1 p-4 pr-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4">
           <GrindCodeVideo room={room} />
         </div>
-        <div className="rounded-lg  border bg-card text-card-foreground shadow-sm my-5 p-4 flex flex-col gap-4">
+
+        <h1 className="text-3xl hidden sm:block text-center font-bold py-5">
+          Room details
+        </h1>
+        <div className="rounded-lg hidden border bg-card text-card-foreground shadow-sm my-3 p-4 sm:flex flex-col gap-4">
           <h1 className="font-bold capitalize text-xl">{room?.name}</h1>
           <p className="text-base text-gray-400">{room?.description}</p>
 
@@ -46,10 +45,10 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
         </div>
       </div>
 
-      <div className="sm:col-span-1 col-span-1 p-4 pl-2">
-       
-        <ChatComponent room={room} />
-        
+      <div className="sm:col-span-1 col-span-1 p-4 pl-2 flex flex-col">
+        <div className="flex-grow">
+          <ChatComponent room={room} />
+        </div>
       </div>
     </div>
   );
