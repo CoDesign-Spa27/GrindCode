@@ -61,8 +61,13 @@ const ChatComponent = ({ room }: { room: Room}) => {
  
   }, [status, session,room]);
 
-  if (!client || !channel) return <div> Setting up </div>;
+  if (!client || !channel) return <div className='flex pt-24 flex-col items-center justify-center'>
+    <div className="chat-loader">
+  <div className="chat-loader-1"></div>
+</div>
+<div className='text-sm font-semibold py-6'>Setting connection</div>
 
+  </div> 
   return (
     <Chat client={client} theme='str-chat__theme-dark' > 
     <Channel channel={channel}>
