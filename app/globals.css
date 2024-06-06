@@ -3,6 +3,8 @@
   @tailwind utilities;
 
   @layer base, theme;
+
+  
 @import 'stream-chat-react/dist/css/v2/index.css';
 
   @layer theme {
@@ -12,20 +14,36 @@
       --str-chat__active-primary-color: #004d40;
       --str-chat__surface-color: #f5f5;
       --str-chat__secondary-surface-color: rgb(228, 0, 0);
-      --str-chat__primary-surface-color: #e0f2f1;
-      --str-chat__primary-surface-color-low-emphasis: #edf7f7;
+      --str-chat__primary-surface-color: #061a19;
+      --str-chat__primary-surface-color-low-emphasis: #0becec;
       --str-chat__border-radius-circle: 6px;
     }
   }
 
+  .str-chat__message{
+    border-radius: 50%;
+  }
+  .str-chat {
+  
+    --str-chat__surface-color: rgba(65, 61, 65, 0.993);
+    --str-chat__primary-color: #3A0763;
+  
+    --str-chat__primary-surface-color: #061a19;
+    --str-chat__primary-surface-color-low-emphasis: #00ebeb;
+    --str-chat__border-radius-circle: 50%;
  
-
+  --str-chat__own-message-bubble-background-color: #3A0763;
+  --str-chat__own-message-bubble-color: white;
+ 
+  --str-chat__deleted-message-background-color: transparent;
+}
 
   .str-chat__channel-list {
     width: 30%;
   }
   .str-chat__channel {
     width: 100%;
+  
   }
   .str-chat__channel {
     height:65%;

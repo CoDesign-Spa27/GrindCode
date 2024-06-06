@@ -64,8 +64,7 @@ const ChatComponent = ({ room }: { room: Room}) => {
   if (!client || !channel) return <div> Setting up </div>;
 
   return (
-    
-         <Chat client={client} theme='str-chat__theme-dark' > 
+    <Chat client={client} theme='str-chat__theme-dark' > 
     <Channel channel={channel}>
       <Window>
         <ChannelHeader live />
@@ -73,7 +72,8 @@ const ChatComponent = ({ room }: { room: Room}) => {
         <MessageInput focus />
       </Window>
     </Channel>
-  </Chat>
+  </Chat> 
+      
  
    
     
