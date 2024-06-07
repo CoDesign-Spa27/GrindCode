@@ -4,7 +4,6 @@ import { UserRoomCard } from "@/app/your-rooms/user-room-card";
 import { Button } from "@/components/ui/button";
 import { CirclePlus } from "lucide-react";
 import { unstable_noStore } from "next/cache";
-import { InputTags } from "@/components/InputTags";
  
 export default async function YourRoomPage() {
   
@@ -51,5 +50,3 @@ export default async function YourRoomPage() {
     </main>
   );
 }
-
-InputTags.displayName = 'InputTags';
