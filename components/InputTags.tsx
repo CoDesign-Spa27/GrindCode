@@ -70,3 +70,4 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
     );
   }
 );
+
