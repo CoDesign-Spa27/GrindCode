@@ -17,12 +17,13 @@ import { createRoomAction } from "./actions"
 import { useRouter } from "next/navigation"
 import { toast } from "@/components/ui/use-toast"
 import { useState } from "react"
+import { InputTags } from "@/components/InputTags"
  
 const formSchema = z.object({
    name: z.string().min(2).max(50),
    description: z.string().min(2).max(300),
    githubRepo: z.string().min(2).max(50),
-   tags: z.string().min(2).max(300)
+   tags: z.array(z.string().min(2).max(50))
 })
 
 export function CreateRoomForm(){
@@ -35,7 +36,7 @@ export function CreateRoomForm(){
           name: "",
           description:"",
           githubRepo: "",
-          tags: "",
+          tags: [] as string[],
         },
       })
   
@@ -161,7 +162,7 @@ export function CreateRoomForm(){
             <FormItem>
               <FormLabel>Tags</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <InputTags {...field} />
               </FormControl>
               <FormDescription>
               List of your programming languages,framework, libraries and anything related to your project so people can find your content</FormDescription>

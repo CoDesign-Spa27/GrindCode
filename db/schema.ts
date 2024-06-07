@@ -19,10 +19,7 @@ import { sql } from "drizzle-orm";
   export const db = drizzle(pool)
    
     
-export const testing=pgTable("testing",{
-    id:text("id").notNull().primaryKey(),
-    name:text("name"),
-})
+ 
   export const users = pgTable("user", {
     id: text("id")
       .primaryKey()
@@ -87,8 +84,11 @@ export const testing=pgTable("testing",{
     .references(() => users.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
   description: text("description"),
-  tags: text("tags").notNull(),
+  tags: text('tags').array().notNull(),
   githubRepo: text("githubRepo"),
   })
    // exporting type of room
    export type Room=typeof room.$inferSelect;
+
+
+ 

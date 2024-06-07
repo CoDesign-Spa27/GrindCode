@@ -1,6 +1,5 @@
 "use client"
 import { Room } from "@/db/schema";
-import { splitTags } from "@/lib/utils";
 import { Github, PencilIcon, Trash } from "lucide-react";
 import { TagList } from "../../components/tags-list";
 import { Button } from "../../components/ui/button";
@@ -55,7 +54,7 @@ export function UserRoomCard({ room }: { room: Room }) {
         </CardHeader>
         <CardContent>
           <h1 className="pb-3">Tags :</h1>
-        <TagList tags={splitTags(room.tags)!} />
+        <TagList tags={(room.tags)!} />
           
         </CardContent>
         <CardContent>

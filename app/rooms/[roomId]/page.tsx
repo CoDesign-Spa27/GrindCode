@@ -1,6 +1,5 @@
 import { TagList } from "@/components/tags-list";
 import { getRoom } from "@/data-access/room";
-import { splitTags } from "@/lib/utils";
 import { Link, Github } from "lucide-react";
 import { GrindCodeVideo } from "./video-player";
 import ChatComponent from "@/components/chat/ChatComponent";
@@ -33,7 +32,7 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
           <p className="text-base text-gray-400">{room?.description}</p>
 
           <h1>Tags:</h1>
-          <TagList tags={splitTags(room.tags)!} />
+          <TagList tags={(room.tags)!}/>
           <div className="flex text-center text-sm gap-2">
             {room?.githubRepo && (
               <Link target="_blank" href={room.githubRepo || ""}>
