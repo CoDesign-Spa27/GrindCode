@@ -23,5 +23,4 @@ npm install
 ```
 npm run dev
 ```
-
-<h2>🍰 Contribution Guidelines:</h2>
+ 
