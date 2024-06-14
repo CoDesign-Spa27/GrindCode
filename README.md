@@ -12,7 +12,7 @@
 docker compose up -d
 ```
 
-<p>3. This project will use NPM for package Management.</p>
+<p>3. Install the dependencies</p>
 
 ```
 npm install
@@ -23,3 +23,5 @@ npm install
 ```
 npm run dev
 ```
+
+<h2>🍰 Contribution Guidelines:</h2>
