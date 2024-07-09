@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from 'nextjs-toploader';
- 
+import { Footer } from './footer'
 import { Providers } from "./provider";
 import { Header } from "./header";
 import { Toaster } from "@/components/ui/toaster";
@@ -35,7 +35,8 @@ export default function RootLayout({
         />
          <Header />
         {children}
-      </Providers>
+        <Footer />
+              </Providers>
        </body>
     </html>
   );
