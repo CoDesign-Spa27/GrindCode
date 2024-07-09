@@ -5,16 +5,16 @@ import Link from "next/link";
 
 export function Footer(){
 return <div>
-    <footer className="relative  pt-8 pb-6">
+    <footer className="relative py-5">
   <div className="container mx-auto px-4">
      <div className="flex justify-between items-center">
-        <div className="text-3xl font-bold">
+        <div className="sm:text-3xl  text-md  font-bold">
            Join GrindCode and Contribute. 
         </div>
         <div className="flex gap-5">
           <Link className="flex items-center gap-2" href='https://github.com/CoDesign-Spa27/GrindCode'>
-          <Github className="bg-white p-1 text-black rounded-full w-8 h-8" />
-           <p className="font-bold">GITHUB</p>
+          <Github className="bg-white p-1 text-black rounded-full sm:w-8 sm:h-8 w-5 h-5" />
+           <p className="font-bold sm:text-md text-sm">GITHUB</p>
           </Link>
           
         </div>
