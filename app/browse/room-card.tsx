@@ -16,7 +16,7 @@ import { TagList } from "@/components/tags-list";
 import { useEffect, useState } from "react";
 
 export function RoomCard({ room }: { room: Room }) {
-  const [isPrivate, setIsPrivate] = useState(false);
+  const [isPrivate, setIsPrivate] = useState<boolean | null>(false);
 
   useEffect(() => {
     setIsPrivate(room.isPrivate);
