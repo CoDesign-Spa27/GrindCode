@@ -5,6 +5,7 @@ import {
     primaryKey,
     integer,
     uuid,
+    boolean,
   } from "drizzle-orm/pg-core"
   import postgres from "postgres"
   import { drizzle } from "drizzle-orm/postgres-js"
@@ -86,6 +87,8 @@ import { sql } from "drizzle-orm";
   description: text("description"),
   tags: text('tags').array().notNull(),
   githubRepo: text("githubRepo"),
+  pin:text("pin"),
+  isPrivate:boolean("isPrivate").default(false)
   })
    // exporting type of room
    export type Room=typeof room.$inferSelect;
