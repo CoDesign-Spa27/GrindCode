@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 
 
 export function UserRoomCard({ room }: { room: Room }) {
-  const [isPrivate, setIsPrivate] = useState(false);
+  const [isPrivate, setIsPrivate] = useState<boolean | null>(false);
 
   useEffect(() => {
     setIsPrivate(room.isPrivate);

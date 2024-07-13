@@ -87,7 +87,7 @@ import { sql } from "drizzle-orm";
   description: text("description"),
   tags: text('tags').array().notNull(),
   githubRepo: text("githubRepo"),
-  pin:text("pin"),
+  pin:text("pin").notNull(),
   isPrivate:boolean("isPrivate").default(false)
   })
    // exporting type of room

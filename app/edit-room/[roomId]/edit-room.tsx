@@ -19,18 +19,25 @@ import { Room } from "@/db/schema";
 import { toast } from "@/components/ui/use-toast";
 import { InputTags } from "@/components/InputTags";
 import { useState } from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
+
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(300),
   githubRepo: z.string().min(2).max(50),
   tags: z.array(z.string().min(2).max(50)),
- 
+  isPrivate: z.boolean().default(false),
+  pin: z.string().min(4).max(4).regex(/^\d{4}$/)
+}).refine(data => !data.isPrivate || (data.isPrivate && data.pin), {
+  message: "PIN is required for private rooms",
+  path: ["pin"]
 });
 
 export function EditRoomForm({ room }: { room: Room }) {
   const [loading, setLoading] = useState(false);
- 
+  const [isPrivate, setIsPrivate] = useState(false);
   const params = useParams();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -39,7 +46,9 @@ export function EditRoomForm({ room }: { room: Room }) {
       name: room.name,
       description: room.description ?? "",
       githubRepo: room.githubRepo ?? "",
-      tags: [] as string[],
+      tags: room.tags ?? [],
+      isPrivate:room.isPrivate ?? undefined,
+      pin:room.pin ?? ""
         
     },
   });
@@ -126,7 +135,6 @@ export function EditRoomForm({ room }: { room: Room }) {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="githubRepo"
@@ -136,14 +144,11 @@ export function EditRoomForm({ room }: { room: Room }) {
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Github Repositry link or name
-                    </FormDescription>
+                    <FormDescription>Github Repository link or name.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="tags"
@@ -154,14 +159,62 @@ export function EditRoomForm({ room }: { room: Room }) {
                       <InputTags {...field} />
                     </FormControl>
                     <FormDescription>
-                      List of your programming languages,framework, libraries
-                      and anything related to your project so people can find
-                      your content
+                      List of your programming languages, framework, libraries, and anything related to your project so people can find your content.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
+<FormField
+                control={form.control}
+                name="isPrivate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Privacy</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        value={field.value ? "private" : "public"}
+                        onValueChange={(value) => {
+                          const isPrivateRoom = value === "private";
+                          setIsPrivate(isPrivateRoom);
+                          field.onChange(isPrivateRoom);
+                          if (!isPrivateRoom) {
+                            form.setValue("pin", "");
+                          }
+                        }}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="public" id="public" />
+                          <Label htmlFor="public">Public</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="private" id="private" />
+                          <Label htmlFor="private">Private</Label>
+                        </div>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormDescription>Select who can enter your room.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {isPrivate && (
+                <FormField
+                  control={form.control}
+                  name="pin"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>PIN</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormDescription>Enter a 4-digit PIN for private room access.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
               <Button type="submit">Submit</Button>
             </form>
           </Form>
