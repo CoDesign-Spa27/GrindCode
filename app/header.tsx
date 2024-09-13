@@ -1,6 +1,6 @@
 "use client";
 import CodeSvg from '../public/code.svg'
-
+import DarkLogo from '../public/darkLogo.svg'
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -15,7 +15,9 @@ import {
 import { LogOut, MenuIcon, X } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import Link from "next/link";
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { FloatingBar } from '../components/FloatingBar';
+import { useTheme } from 'next-themes';
 
 
 export function AccountDropdown() {
@@ -27,6 +29,7 @@ export function AccountDropdown() {
   if (status === "loading") {
     return <Button>Loading...</Button>;
   }
+
 
   
   return (
@@ -65,27 +68,40 @@ export function AccountDropdown() {
   );
 }
 
+
+
 export function Header() {
 
-  
+  const {theme,resolvedTheme}=useTheme();
 const { data: session, status } = useSession();
 const isLoggedIn = status ==="authenticated";
 
-const [nav,setNav]=useState(true);
 
-const handleNav=()=>{
+const [mounted, setMounted] = useState(false);
+ 
+useEffect(() => {
+  setMounted(true);
+}, []);
 
-  setNav(!nav)
+const currentTheme = theme || resolvedTheme;
 
 
+const LogoSVG=useMemo(()=>{
+  return theme === "dark" ? <CodeSvg /> : <DarkLogo />;
+},[theme])
+if (!mounted) {
+
+  return null;
 }
 
   return (
-    <header className="bg-gradient-to-r from-rose-200 to-teal-200 dark:bg-gradient-to-r dark:from-slate-900 dark:via-purple-950 dark:to-slate-900 mx-auto px-6 py-2">
+    <header className="bg-[#E5E7EB] dark:bg-[#020617] mx-auto px-6 py-2">
       <div className="flex items-center justify-between">
         <Link href="/">
-          <div className="font-extrabold flex items-center gap-1 text-2xl tracking-wide">
-         <div className='dark:flex hidden'><CodeSvg />   </div> Grind<span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Code</span>
+          <div className="font-extrabold flex text-[#020617] dark:text-white items-center gap-1 text-2xl tracking-wide">
+         <div className='dark:flex'>
+            {LogoSVG} 
+             </div> Grind<span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Code</span>
           </div>
         </Link>
 
@@ -98,13 +114,13 @@ const handleNav=()=>{
         
          <div className='flex gap-2'>
            <Link
-            className="dark:text-white hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2    dark:hover:bg-gray-100 dark:focus:ring-gray-700 transition-all duration-300 ease-out dark:border-gray-700 dark:hover:text-black"
+            className="dark:text-white text-black hover:text-black hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-md px-5 py-2.5 me-2 mb-2  dark:hover:bg-gray-100 dark:focus:ring-gray-700 transition-all duration-300 ease-out dark:border-gray-700 dark:hover:text-black"
             href="/your-rooms">
              My Rooms
             </Link> 
 
           <Link
-          className='dark:text-white  hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:hover:text-black  transition-all duration-300 ease-out dark:hover:bg-gray-100 dark:focus:ring-gray-700 dark:border-gray-700'
+          className='dark:text-white text-black hover:text-black hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-md px-5 py-2.5 me-2 mb-2  dark:hover:text-black  transition-all duration-300 ease-out dark:hover:bg-gray-100 dark:focus:ring-gray-700 dark:border-gray-700'
           href="/browse">
             Browse
           </Link>  
@@ -124,69 +140,16 @@ const handleNav=()=>{
 
         </div>
 
-        <div className=' sm:hidden'>
+        <div className='px-2 sm:hidden'>
   <ModeToggle />
 </div>
 
-        <div className='sm:hidden flex flex-col'>
-
-        <div onClick={handleNav} className='block md:hidden'>
-    {!nav ? <X size={23}/> : <MenuIcon size={23} />}
-   </div>
-   <div className={!nav ?'fixed left-0 top-0 z-50 w-[60%] h-[100%] bg-gradient-to-b from-rose-200 to-teal-200 border-r-gray-900 ease-in-out duration-500 dark:bg-gradient-to-b dark:from-slate-900 dark:via-purple-950 dark:to-slate-900':'fixed left-[-100%]'}>
-    <div className='pl-5 flex items-center font-semibold gap-2 pt-3 border-b-2 pb-3'>
-   {isLoggedIn ? (
-          <Avatar>
-            <AvatarImage
-              className="md:w-12 md:h-12 w-10 h-10 rounded-full"
-              src={session.user.image || ""}
-              alt="Profile"
-            />
-            
-            <AvatarFallback>{session.user.name}</AvatarFallback>
-          </Avatar>
-        ) : (
-          <h1>Please Sign in</h1>
-        )}
-        {session?.user.name}
-        </div>
-   <div className='flex pt-5 gap-8 pl-5 flex-col capitalize font-bold text-xl' >   
-     {isLoggedIn &&
-     
-     (
-      <div className='flex flex-col
-      gap-5
-      '>
-        <Link onClick={handleNav} href="/your-rooms">
-      <div className='hover:underline'>Your rooms</div>
-      </Link>
-
-<Link onClick={handleNav} href='/browse'>
-<div className='hover:underline'>Browse</div> 
-
-</Link>
+        
       </div>
-      
-    )
-       }
- <div>
- {isLoggedIn ? (
-          <Button onClick={() => signOut({
-            callbackUrl:"/"
-          })}>
-            <LogOut className="m-2 w-4" />
-            Sign Out
-          </Button>
-        ) : (
-          <Button onClick={() => signIn("google")}>
-            Sign In
-          </Button>
-        )}
-  </div>   
-      </div>
-   </div>
-        </div>
-      </div>
+
+      <div className="sm:hidden fixed right-5 bottom-0 top-[30%] z-50">
+  <FloatingBar />
+</div>
       
     </header>
   );

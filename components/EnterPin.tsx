@@ -5,18 +5,31 @@ import { Link, Github } from "lucide-react";
 import { GrindCodeVideo } from "@/app/rooms/[roomId]/video-player";
 import ChatComponent from "@/components/chat/ChatComponent";
 import { Button } from "./ui/button";
-
+import { useRouter } from "next/navigation";
+import { Alert } from "./ui/alert";
+import { toast } from "./ui/use-toast";
 export default function EnterPin({ room }: { room: any }) {
   const [pin, setPin] = useState("");
   const [isVerified, setIsVerified] = useState(false);
-  
+ 
+  const router = useRouter();
 
+  const handleCancel = () => {
+    router.push('/browse')
+  }
+  
   const handlePinSubmit = (e: React.FormEvent) => {
+     
     e.preventDefault();
     if (pin === room.pin) {
       setIsVerified(true);
     } else {
-      alert("Incorrect PIN");
+    toast({
+      variant:'destructive',
+      title:"Wrong Pin",
+      description:"Please enter correct securiy pin to access room."
+    })
+      
     }
   };
 
@@ -34,7 +47,11 @@ export default function EnterPin({ room }: { room: any }) {
             className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm     disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 "
             placeholder="Enter PIN"
           />
+          <div className="flex justify-center items-center gap-5">
+          <Button onClick={handleCancel} variant="destructive" >Cancel</Button>
           <Button type="submit" className="btn my-5 btn-primary">Submit</Button>
+          </div>
+         
         </form>
         </div>
      

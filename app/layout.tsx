@@ -34,6 +34,7 @@ export default function RootLayout({
         showAtBottom={false}
         />
          <Header />
+        
         {children}
         <Footer />
               </Providers>
