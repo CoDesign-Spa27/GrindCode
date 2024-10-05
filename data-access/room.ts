@@ -1,19 +1,26 @@
 
 import  { db } from '@/db';
 import { Room, room } from '@/db/schema';
-import { eq, like } from 'drizzle-orm';
+import { eq, like, sql } from 'drizzle-orm';
 import { getSession } from '@/lib/auth';
  
 
 export async function getRooms(search:string | undefined){
 
  
-    const where=search ? like(room.tags,`%${search}%`) : undefined;
+  if (!search) {
+    // If no search term, return all rooms
+    return await db.query.room.findMany();
+}
 
-    const rooms =await db.query.room.findMany({
-        where,
-    });
-    return rooms;
+// Use a raw SQL query to search for the search term in the tags array
+const rooms = await db.execute(
+    sql`SELECT * FROM room WHERE EXISTS (
+      SELECT 1 FROM unnest(tags) AS tag WHERE tag ILIKE ${'%' + search + '%'}
+    )`
+);
+
+return rooms;
 }
 
 export async function getUserRooms(){
@@ -70,3 +77,4 @@ export async function editRoom(roomData: Room) {
       .returning();
     return updated[0];
   }
+ 

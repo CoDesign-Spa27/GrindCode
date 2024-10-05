@@ -83,3 +83,5 @@ export function RoomCard({ room }: { room: Room }) {
     </div>
   );
 }
+
+export { Room };

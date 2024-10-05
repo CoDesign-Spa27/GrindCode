@@ -79,7 +79,7 @@ if(values.search){
                     variant="link"
                     onClick={()=>{
                         form.setValue("search","");
-                        router.push("/");
+                        router.push("/browse");
                     }}
                     >clear</Button>
                 )
