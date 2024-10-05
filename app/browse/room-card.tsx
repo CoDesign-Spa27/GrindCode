@@ -89,4 +89,4 @@ export function RoomCard({ room }: { room: Room }) {
   );
 }
 
-export { Room };
+export type { Room };
