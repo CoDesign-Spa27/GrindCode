@@ -46,22 +46,22 @@ export function UserRoomCard({ room }: { room: Room }) {
   return (
     <div>
       {isPrivate ? (
-        <Card className="">
-          <CardHeader className="relative">
+        <Card className="bg-neutral-200 dark:bg-[#2f3547]">
+          <CardHeader className="bg-neutral-500 relative dark:bg-neutral-900 rounded-t-md mb-2">
             <Link href={`/edit-room/${room.id}`}>
               <Button size="icon" className="absolute top-4 right-3">
                 <PencilIcon className="w-4 h-4" />
               </Button>
             </Link>
 
-            <CardTitle className="flex gap-4">
+            <CardTitle className="flex text-white gap-4">
               {room.name} <Lock />
             </CardTitle>
 
-            <CardDescription>{room.description}</CardDescription>
+            <CardDescription className="text-neutral-300">{room.description}</CardDescription>
           </CardHeader>
-          <CardContent>
-            <h1 className="pb-3">Tags :</h1>
+          <CardContent className="flex flex-col mt-5 gap-4">
+        
             <TagList tags={room.tags!} />
           </CardContent>
           <CardContent>
@@ -109,8 +109,8 @@ export function UserRoomCard({ room }: { room: Room }) {
           </CardFooter>
         </Card>
       ) : (
-        <Card>
-          <CardHeader className="relative">
+        <Card className="bg-neutral-200 dark:bg-[#2f3547]">
+          <CardHeader className="bg-neutral-500 relative text-white dark:bg-neutral-900 rounded-t-md mb-2">
             <Link href={`/edit-room/${room.id}`}>
               <Button size="icon" className="absolute top-4 right-3">
                 <PencilIcon className="w-4 h-4" />
@@ -118,10 +118,9 @@ export function UserRoomCard({ room }: { room: Room }) {
             </Link>
 
             <CardTitle>{room.name}</CardTitle>
-            <CardDescription>{room.description}</CardDescription>
+            <CardDescription className="text-neutral-300">{room.description}</CardDescription>
           </CardHeader>
-          <CardContent>
-            <h1 className="pb-3">Tags :</h1>
+          <CardContent className="flex mt-5 flex-col gap-4">
             <TagList tags={room.tags!} />
           </CardContent>
           <CardContent>

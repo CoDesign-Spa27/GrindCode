@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Room } from "@/db/schema";
-import { GithubIcon, Lock } from "lucide-react";
+import { CircleArrowOutUpRight, GithubIcon, Lock } from "lucide-react";
 import { TagList } from "@/components/tags-list";
 import { useEffect, useState } from "react";
 
@@ -25,25 +25,29 @@ export function RoomCard({ room }: { room: Room }) {
   return (
     <div>
       {isPrivate ? (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex gap-4">{room.name} <Lock /></CardTitle>
+        <Card className="bg-neutral-200 dark:bg-[#2f3547]">
+          <CardHeader className="bg-neutral-500 dark:bg-neutral-900 rounded-t-md mb-2">
+            <CardTitle className="flex text-white gap-4">{room.name} <Lock /></CardTitle>
            
 
-            <CardDescription>{room.description}</CardDescription>
+            <CardDescription className="text-neutral-300">{room.description}</CardDescription>
 
           </CardHeader>
-          <CardContent className="flex flex-col gap-4">
+          <CardContent className="flex flex-col mt-5 gap-4">
+            <div>
+
             <TagList tags={room.tags} />
+            </div>
             {room.githubRepo && (
               <Link
-                href={room.githubRepo}
-                className="flex items-center gap-2"
-                target="_blank"
-                rel="noopener noreferrer"
+              href={room.githubRepo}
+              className="flex items-center gap-2"
+              target="_blank"
+              rel="noopener noreferrer"
               >
                 <GithubIcon />
                 Github Project
+              <CircleArrowOutUpRight className="w-4 h-4" />
               </Link>
             )}
           </CardContent>
@@ -54,13 +58,13 @@ export function RoomCard({ room }: { room: Room }) {
           </CardFooter>
         </Card>
       ) : (
-        <Card>
-          <CardHeader>
+        <Card className="bg-neutral-200 dark:bg-[#2f3547]">
+          <CardHeader className="bg-neutral-500 text-white dark:bg-neutral-900 rounded-t-md mb-2">
             <CardTitle>{room.name}</CardTitle>
-            <CardDescription>{room.description}</CardDescription>
+            <CardDescription className="text-neutral-300">{room.description}</CardDescription>
           </CardHeader>
-          <CardContent className="flex flex-col gap-4">
-            <TagList tags={room.tags} />
+          <CardContent className="flex mt-5 flex-col gap-4">
+           <TagList tags={room.tags} />
             {room.githubRepo && (
               <Link
                 href={room.githubRepo}
@@ -70,6 +74,7 @@ export function RoomCard({ room }: { room: Room }) {
               >
                 <GithubIcon />
                 Github Project
+              <CircleArrowOutUpRight className="w-4 h-4" />
               </Link>
             )}
           </CardContent>
