@@ -11,7 +11,7 @@ import {
 import Balancer from "react-wrap-balancer";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-
+import "../app/_styles/index.css"
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
 export const Hero = () => {
@@ -43,7 +43,7 @@ export const Hero = () => {
         style={{
           backgroundImage,
         }}
-        className="relative grid min-h-screen place-content-center overflow-hidden bg-gray-950 px-4 text-gray-200"
+        className="relative grid h-full place-content-center overflow-hidden bg-gray-950 px-4 text-gray-200"
       >
         <div className="relative z-10 flex flex-col text-center items-center">
           <h1 className="animate-fade-up font-urbanist text-5xl font-extrabold tracking-wide sm:text-6xl md:text-7xl lg:text-8xl">
@@ -157,41 +157,25 @@ Fast
                 whileTap={{
                   scale: 0.985,
                 }}
-                className="group relative flex w-fit items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50 transition-colors hover:bg-gray-950/50"
+                className="group relative flex w-fit items-center rounded-full bg-gray-950/10 text-gray-50 transition-colors hover:bg-gray-950/50"
                 onClick={() => {
                   signIn();
                 }}
               >
-                Sign in
+<button className="getStarted">
+  <div className="dots_border"></div>
+  <span className="text_button">Get Started</span>
+</button>
+
               </motion.button>
             )}
-
-            <Link
-              href="https://github.com/CoDesign-Spa27/Codeforge"
-              target="_blank"
-            >
-              <motion.button
-                style={{
-                  border,
-                  boxShadow,
-                }}
-                whileHover={{
-                  scale: 1.015,
-                }}
-                whileTap={{
-                  scale: 0.985,
-                }}
-                className="group relative flex w-fit items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50 transition-colors hover:bg-gray-950/50"
-              >
-                See on GitHub
-              </motion.button>
-            </Link>
+ 
           </div>
         </div>
 
         <div className="absolute inset-0 z-0">
           <Canvas>
-            <Stars radius={50} count={2500} factor={4} fade speed={2} />
+            <Stars radius={50} count={2500} factor={4} fade speed={3} />
           </Canvas>
         </div>
       </motion.section>

@@ -23,6 +23,7 @@ export const users = pgTable("user", {
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name"),
   email: text("email").notNull(),
+  isPro: boolean("isPro").default(false),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 });
@@ -88,3 +89,4 @@ export const room = pgTable("room", {
 });
 // exporting type of room
 export type Room = typeof room.$inferSelect;
+export type User = typeof users.$inferSelect;

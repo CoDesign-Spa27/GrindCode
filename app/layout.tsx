@@ -27,16 +27,15 @@ export default function RootLayout({
         <NextTopLoader  
         color=" #D95BFF"
         showSpinner={true}
-        crawlSpeed={200}
        
         shadow="0 0 10px #2299DD,0 0 5px #2299DD"
        
         showAtBottom={false}
         />
-         <Header />
+         {/* <Header /> */}
         
         {children}
-        <Footer />
+        {/* <Footer /> */}
               </Providers>
        </body>
     </html>

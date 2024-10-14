@@ -1,8 +1,8 @@
 "use client";
 import { Room } from "@/db/schema";
 import { Github, Lock, PencilIcon, Trash } from "lucide-react";
-import { TagList } from "../../components/tags-list";
-import { Button } from "../../components/ui/button";
+import { TagList } from "../../../components/tags-list";
+import { Button } from "../../../components/ui/button";
 import {
   Card,
   CardHeader,
@@ -10,7 +10,7 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "../../components/ui/card";
+} from "../../../components/ui/card";
 import Link from "next/link";
 import {
   AlertDialog,
@@ -58,10 +58,11 @@ export function UserRoomCard({ room }: { room: Room }) {
               {room.name} <Lock />
             </CardTitle>
 
-            <CardDescription className="text-neutral-300">{room.description}</CardDescription>
+            <CardDescription className="text-neutral-300">
+              {room.description}
+            </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col mt-5 gap-4">
-        
             <TagList tags={room.tags!} />
           </CardContent>
           <CardContent>
@@ -118,7 +119,9 @@ export function UserRoomCard({ room }: { room: Room }) {
             </Link>
 
             <CardTitle>{room.name}</CardTitle>
-            <CardDescription className="text-neutral-300">{room.description}</CardDescription>
+            <CardDescription className="text-neutral-300">
+              {room.description}
+            </CardDescription>
           </CardHeader>
           <CardContent className="flex mt-5 flex-col gap-4">
             <TagList tags={room.tags!} />

@@ -44,7 +44,7 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
           <Button
             type="button"
             variant="secondary"
-            className="rounded-l-none border border-l-0"
+            className="rounded-l-none border text-pink-400 border-l-0"
             onClick={addPendingDataPoint}
           >
             Add

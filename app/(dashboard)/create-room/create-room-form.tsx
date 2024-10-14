@@ -89,7 +89,7 @@ export function CreateRoomForm() {
       ) : (
         <div>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
                 name="name"
@@ -97,9 +97,11 @@ export function CreateRoomForm() {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field}
+                      placeholder="Name of your project."/>
+                     
                     </FormControl>
-                    <FormDescription>This is your public room name.</FormDescription>
+                  
                     <FormMessage />
                   </FormItem>
                 )}
@@ -111,9 +113,11 @@ export function CreateRoomForm() {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} 
+                      placeholder="A short description of your project."/>
+                      
                     </FormControl>
-                    <FormDescription>Room description.</FormDescription>
+                    
                     <FormMessage />
                   </FormItem>
                 )}
@@ -125,9 +129,11 @@ export function CreateRoomForm() {
                   <FormItem>
                     <FormLabel>Github Repository</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field}
+                      placeholder="Link to your project's Github repository."/>
+                    
                     </FormControl>
-                    <FormDescription>Github Repository link or name.</FormDescription>
+                 
                     <FormMessage />
                   </FormItem>
                 )}
@@ -139,11 +145,10 @@ export function CreateRoomForm() {
                   <FormItem>
                     <FormLabel>Tags</FormLabel>
                     <FormControl>
-                      <InputTags {...field} />
+                      <InputTags {...field} 
+                    placeholder="  List of your programming languages, framework, libraries, and anything related to your project so people can find your content."
+                      />
                     </FormControl>
-                    <FormDescription>
-                      List of your programming languages, framework, libraries, and anything related to your project so people can find your content.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -197,7 +202,9 @@ export function CreateRoomForm() {
                   )}
                 />
               )}
-              <Button  type="submit">Submit</Button>
+              <Button
+              className="bg-pink-500 text-white font-bold hover:bg-pink-600"
+              type="submit">Submit</Button>
             </form>
           </Form>
         </div>

@@ -1,7 +1,9 @@
  
 import { getRoom } from "@/data-access/room";
  
-import EnterPin from "@/components/EnterPin"; // Client-side component for PIN input
+import EnterPin from "@/components/EnterPin";
+import { ArrowLeftIcon } from "lucide-react";
+import Link from "next/link";
 
 export default async function RoomPage({ params }: { params: { roomId: string } }) {
   const { roomId } = params;
@@ -17,6 +19,17 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
 
   return (
     <div  >
+      <div className="pt-2 pl-4 ">
+        <Link href={"/dashboard"} >
+        <div className="flex items-center gap-2 border-2 rounded-full w-20 ">
+
+        <ArrowLeftIcon className="bg-gradient-to-br from-pink-400 to-purple-400 rounded-full w-7 h-7 p-1 text-white" />
+        <p className="font-bold">
+          Exit
+          </p> 
+        </div>
+        </Link>
+      </div>
       <EnterPin room={room} />
     </div>
   );

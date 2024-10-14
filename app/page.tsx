@@ -1,16 +1,12 @@
 "use client";
 
 import { Hero } from "@/components/Hero";
-import { LightHero } from "@/components/LightHero";
-import { Loader } from "@/components/Loader";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-
+import Navbar from "@/components/Navbar";
 
 export default function LandingPage() {
 
   const [mounted,setMounted]=useState(false);
-  const { theme } = useTheme();
 
   useEffect(()=>{
     setMounted(true);
@@ -25,6 +21,9 @@ if(!mounted){
 );
 }
   return (
-  <>{theme == "dark" ? <Hero /> : <LightHero />}</> 
+  <div className="h-screen w-full flex flex-col justify-center">
+  <Navbar />
+   <Hero />
+    </div> 
   );
 }
