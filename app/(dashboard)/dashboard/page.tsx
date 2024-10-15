@@ -1,12 +1,12 @@
 "use client";
 import { countUserRooms } from "@/data-access/user";
-import { ArrowUpRightFromCircleIcon } from "lucide-react";
-import { getSession, useSession } from "next-auth/react";
 import Image from "next/image";
 import { getUserDetails, UserRooms } from "./action";
 import { useEffect, useState } from "react";
 import {User} from "@/db/schema";
-import { Button } from "@/components/ui/button";
+ 
+import { Skeleton } from "@/components/ui/skeleton"
+import { Loader } from "@/components/Loader";
 
 export interface userRoomCountType {
   totalRooms: number;
@@ -17,27 +17,50 @@ export interface userRoomCountType {
 export default function Dashboard() {
   const [userRoomCount, setUserRoomCount] = useState<userRoomCountType>();
   const [userDetails, setUserDetails] = useState<User>();
-
+  const [isLoading ,setIsLoading]=useState(false);
   useEffect(() => {
-    async function fetchUserRooms() {
+    const fetchData = async () => {
+      
+      try {
+        await Promise.all([fetchUserRooms(), fetchUserDetails()]);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  async function fetchUserRooms() {
+    try {
       const userRoom = await countUserRooms();
       setUserRoomCount(userRoom);
+    } catch (e) {
+      console.error(e);
     }
-    fetchUserRooms();
-    async function fetchUserDetails() {
+  }
+
+  async function fetchUserDetails() {
+    try {
       const userDetails = await getUserDetails();
-      setUserDetails(userDetails)
-
+      setUserDetails(userDetails);
+    } catch (e) {
+      console.error(e);
     }
-    fetchUserDetails();
-  }, []);
-  
+  }
 
+  
+if(isLoading || !userDetails || !userRoomCount){
+  return  ( <div className="flex justify-center items-center h-96">
+    <Loader />
+      </div>
+  )
+}
  
   return (
     <div className="p-5">
-   
-      <div className="dark:bg-gray-900 bg-gray-200 p-5 rounded-lg mb-8">
+        <div className="dark:bg-gray-900 bg-gray-200 p-5 rounded-lg mb-8">
       
           <div className="flex justify-between items-center gap-4">
             <div>
@@ -47,7 +70,7 @@ export default function Dashboard() {
                   src="/celebration.svg"
                   alt="celebration"
                   className="w-6 h-6"
-                />
+                  />
               </div>
               <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
                  {userDetails && userDetails?.name}
@@ -60,21 +83,21 @@ export default function Dashboard() {
  
           {/* <div className="flex justify-between items-center gap-4">
             <div>
-              <div
+            <div
             
-                className="flex gap-2 items-center text-sm"
-              >
-                Become a pro with one click{" "}
-                <ArrowUpRightFromCircleIcon className="w-4 h-4" />
-              </div>
-              <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-                You are not a Pro
-              </div>
+            className="flex gap-2 items-center text-sm"
+            >
+            Become a pro with one click{" "}
+            <ArrowUpRightFromCircleIcon className="w-4 h-4" />
+            </div>
+            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+            You are not a Pro
+            </div>
             </div>
             <div className="w-36 pt-5 h-36">
-              <Image src={"/noPro.svg"} alt="No Pro" width={100} height={100} />
+            <Image src={"/noPro.svg"} alt="No Pro" width={100} height={100} />
             </div>
-          </div> */}
+            </div> */}
       
       </div>
  
@@ -105,12 +128,12 @@ export default function Dashboard() {
             <div className="flex py-2 flex-wrap gap-2">
               {/* {user.interest.tags.map((tag, idx) => (
                 <div
-                  key={idx}
-                  className="bg-gray-200 font-bold text-black text-sm px-2 py-1 rounded-full text-center"
+                key={idx}
+                className="bg-gray-200 font-bold text-black text-sm px-2 py-1 rounded-full text-center"
                 >
-                  {tag}
+                {tag}
                 </div>
-              ))} */}
+                ))} */}
               <div className="text-md font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-500 to-red-400">
                 Comming Soon....
               </div>
@@ -118,6 +141,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+   
     </div>
   );
 }

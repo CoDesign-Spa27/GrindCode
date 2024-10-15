@@ -11,15 +11,7 @@ export default function LandingPage() {
   useEffect(()=>{
     setMounted(true);
   },[])
-if(!mounted){
-  return (
-   <div className="h-screen w-full flex items-center justify-center bg-[#020617]">
-  
-   
-
-  </div>
-);
-}
+ 
   return (
   <div className="h-screen w-full flex flex-col justify-center">
   <Navbar />

@@ -13,6 +13,7 @@ export async function middleware(req: NextRequest) {
     '/create-room',
     '/your-rooms',
     '/rooms',
+    '/edit-room'
   ];
 
   // Redirect to dashboard if user is logged in and tries to access the home page
@@ -36,6 +37,7 @@ export const config = {
     '/browse',
     '/create-room',
     '/your-rooms',
-    '/rooms/:path*', // Match any dynamic room IDs
+    '/rooms/:path*',
+    '/edit-room/:path*' // Match any dynamic room IDs
   ],
 };

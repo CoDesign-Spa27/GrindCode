@@ -33,9 +33,7 @@ export const Hero = () => {
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%,#020617 40%, ${color})`;
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
-  if (!mounted) {
-    return <div className="text-white h-screen w-full">Loading....</div>;
-  }
+  
 
   return (
     <>
