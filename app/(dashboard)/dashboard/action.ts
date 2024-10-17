@@ -9,7 +9,7 @@ export async function UserRooms() {
 
     return userRooms;
   } catch (error) {
-    console.error("Error in UserRooms function:", error);
+ 
     throw new Error("Failed to fetch user rooms.");
   }
 }
@@ -26,7 +26,7 @@ export async function getUserDetails(){
     return result;
   }
   catch(error){
-    console.log("error getting user details"+error)
+   
     throw new Error("Error Getting User Details")
 
   }

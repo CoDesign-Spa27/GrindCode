@@ -14,6 +14,7 @@ import { Room } from "@/db/schema";
 import { CircleArrowOutUpRight, GithubIcon, Lock } from "lucide-react";
 import { TagList } from "@/components/tags-list";
 import { useEffect, useState } from "react";
+ 
 
 export function RoomCard({ room }: { room: Room }) {
   const [isPrivate, setIsPrivate] = useState<boolean | null>(false);
@@ -22,6 +23,17 @@ export function RoomCard({ room }: { room: Room }) {
     setIsPrivate(room.isPrivate);
   }, [room.isPrivate]);
 
+  
+  function isValidUrl(url:string) {
+    try {
+      new URL(url);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+ 
   return (
     <div>
       {isPrivate ? (
@@ -38,10 +50,10 @@ export function RoomCard({ room }: { room: Room }) {
 
             <TagList tags={room.tags} />
             </div>
-            {room.githubRepo && (
+            {isValidUrl(room.githubRepo || "") ? (
               <Link
-              href={room.githubRepo}
-              className="flex items-center gap-2"
+              href={room.githubRepo || ""}
+              className="flex items-center text-sm gap-2"
               target="_blank"
               rel="noopener noreferrer"
               >
@@ -49,7 +61,9 @@ export function RoomCard({ room }: { room: Room }) {
                 Github Project
               <CircleArrowOutUpRight className="w-4 h-4" />
               </Link>
-            )}
+            ):(<div>
+              <p className="text-neutral-300 text-sm">No Github Repo Available</p>
+            </div>)}
           </CardContent>
           <CardFooter>
             <Button asChild>

@@ -1,6 +1,6 @@
 "use client";
 import { Room } from "@/db/schema";
-import { Github, Lock, PencilIcon, Trash } from "lucide-react";
+import { CircleArrowOutUpRight, Github, GithubIcon, Lock, PencilIcon, Trash } from "lucide-react";
 import { TagList } from "../../../components/tags-list";
 import { Button } from "../../../components/ui/button";
 import {
@@ -38,10 +38,22 @@ export function UserRoomCard({ room }: { room: Room }) {
     deleteRoomAction(room.id);
 
     toast({
+      variant:"destructive",
       title: "Room Deleted",
       description: "Your Room has been  successfully deleted",
     });
   };
+
+    
+  function isValidUrl(url:string) {
+    try {
+      new URL(url);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
 
   return (
     <div>
@@ -66,14 +78,20 @@ export function UserRoomCard({ room }: { room: Room }) {
             <TagList tags={room.tags!} />
           </CardContent>
           <CardContent>
-            <div className="flex text-sm gap-2">
-              {room?.githubRepo && (
-                <Link target="blank" href={room.githubRepo || ""}>
-                  <Github />
-                </Link>
-              )}
-              Github
-            </div>
+          {isValidUrl(room.githubRepo || "") ? (
+              <Link
+              href={room.githubRepo || ""}
+              className="flex items-center text-sm gap-2"
+              target="_blank"
+              rel="noopener noreferrer"
+              >
+                <GithubIcon />
+                Github Project
+              <CircleArrowOutUpRight className="w-4 h-4" />
+              </Link>
+            ):(<div>
+              <p className="text-neutral-300 text-sm">No Github Repo Available</p>
+            </div>)}
           </CardContent>
           <CardFooter className="flex gap-2">
             <Button asChild>

@@ -44,6 +44,6 @@ export async function getUser() {
     .select()
     .from(users)
     .where(eq(users.id, session?.user.id));
-  console.log(result);
+ 
   return result[0];
 }

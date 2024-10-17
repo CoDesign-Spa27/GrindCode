@@ -8,7 +8,7 @@ import { unstable_noStore } from "next/cache";
 export default async function YourRoomPage() {
   unstable_noStore();
   const items = await getUserRooms();
- console.log(items)
+ 
   return (
     <main className="flex flex-col items-center justify-between">
       <div className="container mx-auto">
@@ -17,12 +17,7 @@ export default async function YourRoomPage() {
             Your Grinding Rooms
           </h1>
 
-          <Link href="/create-room">
-            <Button variant="secondary" className="flex gap-2 items-center">
-              Create room
-              <CirclePlus />
-            </Button>
-          </Link>
+       
         </div>
 
         <div className="grid md:grid-cols-3 py-4  gap-4">

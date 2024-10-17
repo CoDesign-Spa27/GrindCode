@@ -23,15 +23,6 @@ export default async function Browse({searchParams}: {
       <div className="container mx-auto">
       <div className="w-full border-b py-4 flex items-center justify-between"> 
         <h1 className="md:text-4xl text-2xl font-bold text-center py-4">Live Grinding Rooms</h1>
-   
-    <Link href='/create-room'>
-        <Button
-        variant="secondary"
-        className="flex gap-2 items-center">
-            Create room
-            <CirclePlus />
-        </Button>
-    </Link>
  </div>
  <div className="py-4">
  <BrowseSearchBar />

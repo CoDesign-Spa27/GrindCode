@@ -15,8 +15,11 @@ import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Button } from "@/components/ui/button";
 import { GrLogout } from "react-icons/gr";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { UserCircle } from "lucide-react";
 
 export const Sidenav = () => {
+
   return (
     <div className="flex h-screen w-full ">
       <Sidebar />
@@ -28,8 +31,10 @@ export const Sidenav = () => {
 };
 
 const Sidebar = () => {
+  const pathname =usePathname();
+ 
   const [open, setOpen] = useState(true);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(pathname);
 
   return (
     <motion.nav
@@ -121,8 +126,8 @@ const Option = ({
     <Link href={href || ""} passHref >
     <motion.button
       layout
-      onClick={() => setSelected(title)}
-      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${selected === title ? "bg-indigo-100 text-indigo-800" : "text-slate-500 hover:bg-gray-800 hover:text-gray-200 font-black"}`}
+      onClick={() => setSelected(href || "")}
+      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${selected === href ? "bg-indigo-100 text-indigo-800" : "text-slate-500 hover:bg-gray-800 hover:text-gray-200 font-black"}`}
       >
       <motion.div
         layout
@@ -163,7 +168,7 @@ const TitleSection = ({ open }: { open: boolean }) => {
               src={session.user.image || ""}
               alt="Profile"
             />
-            <AvatarFallback>{session.user.name}</AvatarFallback>
+            <AvatarFallback><UserCircle /></AvatarFallback>
           </Avatar>
         ) : (
           <Button>Sign In</Button>

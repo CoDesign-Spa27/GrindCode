@@ -1,11 +1,11 @@
 "use client"
 import { useState } from "react";
-import NextTopLoader from "nextjs-toploader";
 import { Sidenav } from "../_components/Sidenav";
 import { Providers } from "../provider";
-import { Toaster } from "@/components/ui/toaster";
 import { ModeToggle } from "@/components/mode-toggle";
 import { FiMenu } from "react-icons/fi";  
+import { CirclePlus } from "lucide-react";
+import Link from "next/link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
  
@@ -39,14 +39,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {sidebarOpen && (
           <div
           className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
-          onClick={toggleSidebar} // Close sidebar when clicking outside of it
+          onClick={toggleSidebar}  
           />
         )}
 
       
         <div className="flex-grow p-4 md:overflow-y-auto md:px-12">
     
-          <div className="flex justify-end">
+          <div className="flex items-center gap-5 justify-end">
+           <CreateRoomButton />
             <ModeToggle />
           </div>
           {children}
@@ -54,5 +55,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
         </div>
     </Providers>
+  );
+}
+
+
+
+export function CreateRoomButton(){
+  return (
+    <div>
+      <Link href={"/create-room"}>
+    <button
+      className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white gap-2 bg-gradient-to-r from-pink-500 to-purple-500 border border-transparent rounded-md hover:bg-gradient-to-r hover:from-pink-700 hover:to-purple-700"
+      >
+      Create Room
+      <CirclePlus />
+    
+    </button>
+        </Link>
+      </div>
   );
 }
