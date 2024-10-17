@@ -60,7 +60,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 
 
-export function CreateRoomButton(){
+function CreateRoomButton(){
   return (
     <div>
       <Link href={"/create-room"}>
