@@ -1,7 +1,7 @@
 import Lottie from 'react-lottie-player'
 
 import loader from '../assets/Laoder.json'
-export function Loader (){
+const Loader =()=>{
 return (
     <div className='w-full flex items-center justify-center h-full'>
 
@@ -14,3 +14,4 @@ return (
     </div>
 )
 }
+export default Loader

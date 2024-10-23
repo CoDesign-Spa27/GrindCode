@@ -13,7 +13,6 @@ declare module "next-auth" {
   }
 
 export const authConfig={
-    
 adapter:DrizzleAdapter(db) as Adapter,
 session: {
     strategy: "jwt",
@@ -55,6 +54,11 @@ callbacks: {
       return session;
     },
   },
+  pages:{
+    signIn:'/signin',
+    signOut:'/signout'
+  },
+  
 }satisfies AuthOptions;
 
 export function getSession(){

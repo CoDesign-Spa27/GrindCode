@@ -100,7 +100,7 @@
 /* Get started getStarted ------- */
 /* From Uiverse.io by MuhammadHasann */ 
 .getStarted {
-    --black-700: hsla(0 0% 12% / 1);
+    --black-700: #020617;
     --border_radius: 9999px;
     --transtion: 0.3s ease-in-out;
     --offset: 2px;
