@@ -27,10 +27,22 @@ const formSchema = z.object({
   githubRepo: z.string().min(2).max(50),
   tags: z.array(z.string().min(2).max(50)),
   isPrivate: z.boolean().default(false),
-  pin: z.string().min(4).max(4).regex(/^\d{4}$/)
-}).refine(data => !data.isPrivate || (data.isPrivate && data.pin), {
-  message: "PIN is required for private rooms",
-  path: ["pin"]
+  pin: z.string().optional()
+}).superRefine((data, ctx) => {
+  if (data.isPrivate && (!data.pin || !/^\d{4}$/.test(data.pin))) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "PIN is required and must be 4 digits for private rooms",
+      path: ["pin"]
+    });
+  }
+  if (!data.isPrivate && data.pin) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "PIN should not be set for public rooms",
+      path: ["pin"]
+    });
+  }
 });
 
 export function CreateRoomForm() {
@@ -53,7 +65,10 @@ export function CreateRoomForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     try {
-      const room = await createRoomAction(values);
+      const room = await createRoomAction({
+        ...values,
+        pin: values.isPrivate?values.pin || "":""
+      });
 
       toast({
         title: "Room Created",
@@ -70,6 +85,17 @@ export function CreateRoomForm() {
       setLoading(false);
     }
   }
+
+  const handlePrivateChange=(value:string)=>{
+const isPrivateRoom=value === "private";
+setIsPrivate(isPrivateRoom);
+form.setValue("isPrivate",isPrivateRoom);
+if(!isPrivateRoom){
+  form.setValue("pin",'');
+}
+if (!isPrivateRoom) {
+  form.clearErrors("pin");
+}  }
 
   return (
     <div>
@@ -162,14 +188,7 @@ export function CreateRoomForm() {
                     <FormControl>
                       <RadioGroup
                         value={field.value ? "private" : "public"}
-                        onValueChange={(value) => {
-                          const isPrivateRoom = value === "private";
-                          setIsPrivate(isPrivateRoom);
-                          field.onChange(isPrivateRoom);
-                          if (!isPrivateRoom) {
-                            form.setValue("pin", "");
-                          }
-                        }}
+                        onValueChange={handlePrivateChange}
                       >
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="public" id="public" />

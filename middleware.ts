@@ -37,8 +37,9 @@ export const config = {
     '/',
     '/dashboard',
     '/browse',
-    '/create-room',
-    '/your-rooms',
+    '/create-room/:path*',
+    
+    '/your-rooms/:path*',
     '/rooms/:path*',
     '/edit-room/:path*', 
      '/signout/:path*',
