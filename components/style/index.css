@@ -1,0 +1,10 @@
+.box {
+    border: 1px solid;
+    border-image: none;
+    border-image-source: linear-gradient(45deg, #DA297A, #C477E9);
+    border-image-slice: 1;
+    border-width: 1px 3px 0 0;
+
+}
+
+/* 9698F3 */

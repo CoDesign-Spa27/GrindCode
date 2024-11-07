@@ -41,7 +41,7 @@ export const Hero = () => {
         style={{
           backgroundImage,
         }}
-        className="relative grid h-full place-content-center overflow-hidden bg-gray-950 px-4 text-gray-200"
+        className="relative grid h-screen place-content-center overflow-hidden bg-gray-950 px-4 text-gray-200"
       >
         <div className="relative z-10 flex flex-col text-center items-center">
           <h1 className="animate-fade-up font-urbanist text-5xl font-extrabold tracking-wide sm:text-6xl md:text-7xl lg:text-8xl">
