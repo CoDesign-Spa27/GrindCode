@@ -59,11 +59,11 @@ const Banner1 = () => {
                     </div>
                 </motion.div>
  
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4  '>
                     {cardDetails.map((card, index) => {
                         return (
-                            <CardContainer  key={index} className=''>
-<CardBody className=' relative group/card  w-auto h-auto rounded-xl p-6 border '>
+                            <CardContainer  key={index}  className=''>
+<CardBody className=' relative group/card  w-auto h-auto rounded-xl p-6 '>
 
                             <motion.div
                                
@@ -81,12 +81,24 @@ const Banner1 = () => {
                                     {card.logo}
                                 </div>
                                     </CardItem>
+                                
+                                <CardItem 
+                                 translateZ={-40}
+                                >
+
                                 <div className='text-lg font-semibold mb-3'>
                                     {card.title}
                                 </div>
+                                </CardItem>
+
+                                <CardItem
+                                translateZ={30}
+                                >
+
                                 <div className='text-sm text-gray-400'>
                                     {card.description}
                                 </div>
+                                </CardItem>
                             </motion.div>
                     </CardBody>
                                 </CardContainer>

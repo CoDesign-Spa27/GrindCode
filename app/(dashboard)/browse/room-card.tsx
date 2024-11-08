@@ -37,12 +37,12 @@ export function RoomCard({ room }: { room: Room }) {
   return (
     <div>
       {isPrivate ? (
-        <Card className="bg-neutral-200 dark:bg-[#2f3547]">
-          <CardHeader className="bg-neutral-500 dark:bg-neutral-900 rounded-t-md mb-2">
-            <CardTitle className="flex text-white gap-4">{room.name} <Lock /></CardTitle>
+        <Card className="">
+          <CardHeader className=" rounded-t-md mb-2">
+            <CardTitle className="flex text-neutral-900 dark:text-white gap-4">{room.name} <Lock /></CardTitle>
            
 
-            <CardDescription className="text-neutral-300">{room.description}</CardDescription>
+            <CardDescription className="text-neutral-400">{room.description}</CardDescription>
 
           </CardHeader>
           <CardContent className="flex flex-col mt-5 gap-4">
@@ -62,7 +62,7 @@ export function RoomCard({ room }: { room: Room }) {
               <CircleArrowOutUpRight className="w-4 h-4" />
               </Link>
             ):(<div>
-              <p className="text-neutral-300 text-sm">No Github Repo Available</p>
+              <p className="text-neutral-400 text-sm">No Github Repo Available</p>
             </div>)}
           </CardContent>
           <CardFooter>
@@ -72,10 +72,10 @@ export function RoomCard({ room }: { room: Room }) {
           </CardFooter>
         </Card>
       ) : (
-        <Card className="bg-neutral-200 dark:bg-[#2f3547]">
-          <CardHeader className="bg-neutral-500 text-white dark:bg-neutral-900 rounded-t-md mb-2">
+        <Card className=" ">
+          <CardHeader className=" text-neutral-900  dark:text-white rounded-t-md mb-2">
             <CardTitle>{room.name}</CardTitle>
-            <CardDescription className="text-neutral-300">{room.description}</CardDescription>
+            <CardDescription className="text-neutral-400">{room.description}</CardDescription>
           </CardHeader>
           <CardContent className="flex mt-5 flex-col gap-4">
            <TagList tags={room.tags} />

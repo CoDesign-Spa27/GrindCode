@@ -1,6 +1,6 @@
 "use client";
 import { Room } from "@/db/schema";
-import { CircleArrowOutUpRight, Github, GithubIcon, Lock, PencilIcon, Trash } from "lucide-react";
+import { CircleArrowOutUpRight, Github, GithubIcon, Lock, PencilIcon, Trash, Trash2 } from "lucide-react";
 import { TagList } from "../../../components/tags-list";
 import { Button } from "../../../components/ui/button";
 import {
@@ -58,19 +58,19 @@ export function UserRoomCard({ room }: { room: Room }) {
   return (
     <div>
       {isPrivate ? (
-        <Card className="bg-neutral-200 dark:bg-[#2f3547]">
-          <CardHeader className="bg-neutral-500 relative dark:bg-neutral-900 rounded-t-md mb-2">
+        <Card className="">
+          <CardHeader className="  relative   rounded-t-md mb-2">
             <Link href={`/edit-room/${room.id}`}>
-              <Button size="icon" className="absolute top-4 right-3">
-                <PencilIcon className="w-4 h-4" />
-              </Button>
+              <div className="absolute top-4 right-3">
+                <PencilIcon size={22} />
+              </div>
             </Link>
 
-            <CardTitle className="flex text-white gap-4">
+            <CardTitle className="flex text-neutral-900 dark:text-white gap-4">
               {room.name} <Lock />
             </CardTitle>
 
-            <CardDescription className="text-neutral-300">
+            <CardDescription className="text-neutral-400">
               {room.description}
             </CardDescription>
           </CardHeader>
@@ -90,7 +90,7 @@ export function UserRoomCard({ room }: { room: Room }) {
               <CircleArrowOutUpRight className="w-4 h-4" />
               </Link>
             ):(<div>
-              <p className="text-neutral-300 text-sm">No Github Repo Available</p>
+              <p className="text-neutral-400 text-sm">No Github Repo Available</p>
             </div>)}
           </CardContent>
           <CardFooter className="flex gap-2">
@@ -100,9 +100,9 @@ export function UserRoomCard({ room }: { room: Room }) {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="destructive">
-                  <Trash className="w-4 h-4 mr-2" /> Delete Room
-                </Button>
+                <div className="rounded-full ml-3">
+                  
+                  <Trash2 size={22} className=" text-red-600 cursor-pointer" /></div>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
@@ -128,16 +128,16 @@ export function UserRoomCard({ room }: { room: Room }) {
           </CardFooter>
         </Card>
       ) : (
-        <Card className="bg-neutral-200 dark:bg-[#2f3547]">
-          <CardHeader className="bg-neutral-500 relative text-white dark:bg-neutral-900 rounded-t-md mb-2">
+        <Card className="">
+          <CardHeader className="  relative text-neutral-900  dark:text-white rounded-t-md mb-2">
             <Link href={`/edit-room/${room.id}`}>
-              <Button size="icon" className="absolute top-4 right-3">
-                <PencilIcon className="w-4 h-4" />
-              </Button>
+              <div  className="absolute top-4 right-3">
+                <PencilIcon size={22}/>
+              </div>
             </Link>
 
             <CardTitle>{room.name}</CardTitle>
-            <CardDescription className="text-neutral-300">
+            <CardDescription className="text-neutral-400">
               {room.description}
             </CardDescription>
           </CardHeader>
@@ -161,9 +161,9 @@ export function UserRoomCard({ room }: { room: Room }) {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="destructive">
-                  <Trash className="w-4 h-4 mr-2" /> Delete Room
-                </Button>
+              <div className="rounded-full ml-3 cursor-pointer">
+                  
+                  <Trash2 size={22} className=" text-red-600" /></div>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>

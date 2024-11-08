@@ -56,7 +56,7 @@ export function Tutorial() {
   ];
 
   return (
-    <div className="h-[20rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full  items-start justify-start mt-10 mb-40">
+    <div className="h-[20rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full  items-start justify-start mt-10 mb-40 px-5">
     
       <Tabs tabs={tabs} />
     </div>
@@ -72,7 +72,7 @@ const CreateRoom = () => {
       width="1000"
       height="1000"
       unoptimized
-      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
+      className="object-cover object-left-top h-[90%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
     />
   );
 };
@@ -87,7 +87,7 @@ const YourRoomInside = () => {
       width="1000"
       unoptimized
       height="1000"
-      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
+      className="object-cover object-left-top h-[90%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
     />
   );
 };
@@ -103,7 +103,7 @@ const Dashboard = () => {
       width="1000"
       unoptimized
       height="1000"
-      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
+      className="object-cover object-left-top h-[90%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
     />
   );
 };
@@ -118,7 +118,7 @@ const YourRooms = () => {
       width="1000"
       height="1000"
       unoptimized
-      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
+      className="object-cover object-left-top h-[90%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
     />
   );
 };
@@ -135,7 +135,7 @@ const JoinRoom = () => {
       width="1000"
       height="1000"
       unoptimized
-      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
+      className="object-cover object-left-top h-[90%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
     />
   );
 };

@@ -31,7 +31,7 @@ export default function LandingPage() {
     }
 }
   return (
-  <div className="w-full h-full flex flex-col justify-center bg-[#020617]">
+  <div className="w-full h-full flex flex-col justify-center ">
 <div className="">
   <Navbar />
   <Hero />
@@ -39,7 +39,7 @@ export default function LandingPage() {
   
 
    <Banner1 />
-    <div>
+    <div className="bg-[#020617]">
     <motion.div
                    variants={itemVariants}
                    initial="hidden"
@@ -56,9 +56,9 @@ export default function LandingPage() {
                 </motion.div>
    <Tutorial />
 
-    </div>
 <FAQ />
 <Footer />
+    </div>
     </div> 
   );
 }
