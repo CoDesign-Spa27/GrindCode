@@ -1,6 +1,15 @@
 "use client";
 import { Room } from "@/db/schema";
-import { CircleArrowOutUpRight, Github, GithubIcon, Lock, PencilIcon, Trash, Trash2 } from "lucide-react";
+import {
+  CircleArrowOutUpRight,
+  Github,
+  GithubIcon,
+  Lock,
+  PencilIcon,
+  LinkIcon,
+  Trash,
+  Trash2,
+} from "lucide-react";
 import { TagList } from "../../../components/tags-list";
 import { Button } from "../../../components/ui/button";
 import {
@@ -26,26 +35,40 @@ import {
 import { deleteRoomAction } from "./action";
 import { toast } from "@/components/ui/use-toast";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export function UserRoomCard({ room }: { room: Room }) {
   const [isPrivate, setIsPrivate] = useState<boolean | null>(false);
+  const [roomId, setRoomId] = useState<string | null>(null);
+
+
+  const BASE_URL_LOCAL = "http://localhost:3000/rooms/";
+  // const  BASE_URL_PROD='"http://localhost:3000';
 
   useEffect(() => {
     setIsPrivate(room.isPrivate);
+    setRoomId(room.id);
   }, [room.isPrivate]);
 
   const handleDeleteButton = () => {
     deleteRoomAction(room.id);
 
     toast({
-      variant:"destructive",
+      variant: "destructive",
       title: "Room Deleted",
       description: "Your Room has been  successfully deleted",
     });
   };
+  const roomLink = BASE_URL_LOCAL + roomId;
 
-    
-  function isValidUrl(url:string) {
+  const copyRoomLink = () => {
+    navigator.clipboard.writeText(roomLink);
+    toast({
+      title: "Room Link Copied!",
+      duration: 5000,
+    });
+  };
+  function isValidUrl(url: string) {
     try {
       new URL(url);
       return true;
@@ -54,17 +77,22 @@ export function UserRoomCard({ room }: { room: Room }) {
     }
   }
 
-
   return (
     <div>
       {isPrivate ? (
         <Card className="">
           <CardHeader className="  relative   rounded-t-md mb-2">
-            <Link href={`/edit-room/${room.id}`}>
-              <div className="absolute top-4 right-3">
-                <PencilIcon size={22} />
+            <div className="flex items-center gap-5 absolute top-4 right-3">
+              <Link href={`/edit-room/${room.id}`}>
+                <div className="">
+                  <PencilIcon size={22} />
+                </div>
+              </Link>
+
+              <div className=" cursor-pointer">
+                <LinkIcon onClick={copyRoomLink} />
               </div>
-            </Link>
+            </div>
 
             <CardTitle className="flex text-neutral-900 dark:text-white gap-4">
               {room.name} <Lock />
@@ -78,20 +106,24 @@ export function UserRoomCard({ room }: { room: Room }) {
             <TagList tags={room.tags!} />
           </CardContent>
           <CardContent>
-          {isValidUrl(room.githubRepo || "") ? (
+            {isValidUrl(room.githubRepo || "") ? (
               <Link
-              href={room.githubRepo || ""}
-              className="flex items-center text-sm gap-2"
-              target="_blank"
-              rel="noopener noreferrer"
+                href={room.githubRepo || ""}
+                className="flex items-center text-sm gap-2"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <GithubIcon />
                 Github Project
-              <CircleArrowOutUpRight className="w-4 h-4" />
+                <CircleArrowOutUpRight className="w-4 h-4" />
               </Link>
-            ):(<div>
-              <p className="text-neutral-400 text-sm">No Github Repo Available</p>
-            </div>)}
+            ) : (
+              <div>
+                <p className="text-neutral-400 text-sm">
+                  No Github Repo Available
+                </p>
+              </div>
+            )}
           </CardContent>
           <CardFooter className="flex gap-2">
             <Button asChild>
@@ -101,8 +133,8 @@ export function UserRoomCard({ room }: { room: Room }) {
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <div className="rounded-full ml-3">
-                  
-                  <Trash2 size={22} className=" text-red-600 cursor-pointer" /></div>
+                  <Trash2 size={22} className=" text-red-600 cursor-pointer" />
+                </div>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
@@ -130,11 +162,17 @@ export function UserRoomCard({ room }: { room: Room }) {
       ) : (
         <Card className="">
           <CardHeader className="  relative text-neutral-900  dark:text-white rounded-t-md mb-2">
-            <Link href={`/edit-room/${room.id}`}>
-              <div  className="absolute top-4 right-3">
-                <PencilIcon size={22}/>
+            <div className="flex items-center gap-5 absolute top-4 right-3">
+              <Link href={`/edit-room/${room.id}`}>
+                <div className="">
+                  <PencilIcon size={22} />
+                </div>
+              </Link>
+
+              <div className=" cursor-pointer">
+                <LinkIcon onClick={copyRoomLink} />
               </div>
-            </Link>
+            </div>
 
             <CardTitle>{room.name}</CardTitle>
             <CardDescription className="text-neutral-400">
@@ -161,9 +199,9 @@ export function UserRoomCard({ room }: { room: Room }) {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-              <div className="rounded-full ml-3 cursor-pointer">
-                  
-                  <Trash2 size={22} className=" text-red-600" /></div>
+                <div className="rounded-full ml-3 cursor-pointer">
+                  <Trash2 size={22} className=" text-red-600" />
+                </div>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>

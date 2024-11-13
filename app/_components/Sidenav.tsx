@@ -173,7 +173,7 @@ const TitleSection = ({ open }: { open: boolean }) => {
         ) : (
           <div>
             <svg
-              className="animate-spin h-5 w-5 mr-3 text-white"
+              className="animate-spin h-5 w-5 mr-3 dark:text-white text-black"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"

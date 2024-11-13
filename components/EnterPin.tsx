@@ -1,7 +1,7 @@
 'use client';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TagList } from "@/components/tags-list";
-import { Link, Github } from "lucide-react";
+import { Link, Github, LinkIcon } from "lucide-react";
 import { GrindCodeVideo } from "@/app/rooms/[roomId]/video-player";
 import ChatComponent from "@/components/chat/ChatComponent";
 import { Button } from "./ui/button";
@@ -11,13 +11,29 @@ import { toast } from "./ui/use-toast";
 export default function EnterPin({ room }: { room: any }) {
   const [pin, setPin] = useState("");
   const [isVerified, setIsVerified] = useState(false);
+  const [roomId, setRoomId] = useState<string | null>(null);
  
   const router = useRouter();
+
+  const BASE_URL_LOCAL = "http://localhost:3000/rooms/";
+  // const  BASE_URL_PROD='"http://localhost:3000';
 
   const handleCancel = () => {
     router.push('/browse')
   }
+  useEffect(()=>{
+    setRoomId(room.id);
+  })
   
+  const roomLink = BASE_URL_LOCAL + roomId;
+
+  const copyRoomLink = () => {
+    navigator.clipboard.writeText(roomLink);
+    toast({
+      title: "Room Link Copied!",
+      duration: 5000,
+    });
+  };
   const handlePinSubmit = (e: React.FormEvent) => {
      
     e.preventDefault();
@@ -70,8 +86,18 @@ export default function EnterPin({ room }: { room: any }) {
         Room details
       </h1>
       <div className="rounded-lg hidden border bg-card text-card-foreground shadow-sm my-3 p-4 sm:flex flex-col gap-4">
+        <div className="flex justify-between items-center">
+<div>
+
         <h1 className="font-bold capitalize text-xl">{room?.name}</h1>
         <p className="text-base text-gray-400">{room?.description}</p>
+</div>
+ 
+<div className=" cursor-pointer">
+                <LinkIcon onClick={copyRoomLink} />
+              </div>
+
+        </div>
 
         <h1>Tags:</h1>
         <TagList tags={(room.tags)!}/>

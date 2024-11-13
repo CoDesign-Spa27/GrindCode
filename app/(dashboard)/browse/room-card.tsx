@@ -11,18 +11,26 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Room } from "@/db/schema";
-import { CircleArrowOutUpRight, GithubIcon, Lock } from "lucide-react";
+import { CircleArrowOutUpRight, GithubIcon, LinkIcon, Lock } from "lucide-react";
 import { TagList } from "@/components/tags-list";
 import { useEffect, useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
  
 
 export function RoomCard({ room }: { room: Room }) {
   const [isPrivate, setIsPrivate] = useState<boolean | null>(false);
+  const [roomId,setRoomId]=useState<string | null>(null);
+  const { toast } = useToast();
+ 
+const  BASE_URL_LOCAL='http://localhost:3000/rooms/';
+// const  BASE_URL_PROD='"http://localhost:3000';
+useEffect(() => {
+  setIsPrivate(room.isPrivate);
+  setRoomId(room.id);
+}, [room.isPrivate]);
 
-  useEffect(() => {
-    setIsPrivate(room.isPrivate);
-  }, [room.isPrivate]);
-
+const roomLink=BASE_URL_LOCAL + roomId;
+console.log(roomLink);
   
   function isValidUrl(url:string) {
     try {
@@ -34,21 +42,32 @@ export function RoomCard({ room }: { room: Room }) {
   }
 
  
+  const copyRoomLink=()=>{
+    navigator.clipboard.writeText(roomLink);
+    toast({
+      title: "Room Link Copied!",
+      duration: 5000,
+    });
+  }
   return (
     <div>
       {isPrivate ? (
         <Card className="">
-          <CardHeader className=" rounded-t-md mb-2">
+          <CardHeader className="relative rounded-t-md mb-2">
+          <div className="absolute top-4 right-5 cursor-pointer">
+
+<LinkIcon onClick={copyRoomLink} />
+           </div>
             <CardTitle className="flex text-neutral-900 dark:text-white gap-4">{room.name} <Lock /></CardTitle>
            
 
             <CardDescription className="text-neutral-400">{room.description}</CardDescription>
-
+         
+            <TagList tags={room.tags} />
           </CardHeader>
           <CardContent className="flex flex-col mt-5 gap-4">
             <div>
 
-            <TagList tags={room.tags} />
             </div>
             {isValidUrl(room.githubRepo || "") ? (
               <Link
