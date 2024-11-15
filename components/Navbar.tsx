@@ -3,6 +3,7 @@ import React from 'react'
 import '../app/_styles/index.css';
 import { signIn } from 'next-auth/react';
 import Logo from './Logo';
+import GithubStarsButton from './ui/GithubStarsButton';
 const Navbar = () => {
   return (
     <div className=' w-full bg-[#020617] p-2 sm:px-20 flex items-center justify-between'>
@@ -10,9 +11,11 @@ const Navbar = () => {
    <Logo/>
        
       </div>
-      <div className='flex items-center'>
+      <div className='flex items-center gap-5'>
         <div>
-
+        <GithubStarsButton />
+        </div>
+        <div>
       <button
       onClick={() => {
         signIn();

@@ -9,6 +9,7 @@ import { Footer } from "@/components/Landing/Footer";
 import { Tutorial } from "@/components/Landing/Tutorial";
 import { motion } from "framer-motion";
 
+
 export default function LandingPage() {
 
   const [mounted,setMounted]=useState(false);
@@ -36,6 +37,7 @@ export default function LandingPage() {
   <Navbar />
   <Hero />
   </div>
+ 
   
 
    <Banner1 />

@@ -6,6 +6,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { FiMenu } from "react-icons/fi";  
 import { CirclePlus } from "lucide-react";
 import Link from "next/link";
+import GithubStarsButton from "@/components/ui/GithubStarsButton";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
  
@@ -48,6 +49,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     
           <div className="flex items-center gap-5 justify-end">
            <CreateRoomButton />
+           <GithubStarsButton />
             <ModeToggle />
           </div>
           {children}
