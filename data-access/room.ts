@@ -51,7 +51,6 @@ export async function createRoom(
   const user = await db
     .select({
       id: users.id,
-      isPro: users.isPro,
     })
     .from(users)
     .where(eq(users.id, userId))
@@ -60,17 +59,8 @@ export async function createRoom(
   if (!user.length) {
     throw new Error("User not found");
   }
-  const isPro = user[0].isPro;
-  const roomCount = await countUserRooms();
 
-  if (!isPro) {
-    if (roomCount.totalRooms >= 2) {
-      throw new Error("Non-pro users can only create up to 2 rooms.");
-    }
-    if (roomData.isPrivate) {
-      throw new Error("Non-pro users cannot create private rooms.");
-    }
-  }
+  
   const inserted = await db
     .insert(room)
     .values({ ...roomData, userId })

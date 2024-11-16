@@ -69,7 +69,10 @@ function CreateRoomButton(){
     <button
       className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white gap-2 bg-gradient-to-r from-pink-500 to-purple-500 border border-transparent rounded-md hover:bg-gradient-to-r hover:from-pink-700 hover:to-purple-700"
       >
+        <span  className="sm:block hidden">
+
       Create Room
+        </span>
       <CirclePlus />
     
     </button>

@@ -20,7 +20,7 @@ import { useState } from "react"
 import { InputTags } from "@/components/InputTags"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-
+import bcrypt from 'bcryptjs';
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(300),
@@ -62,12 +62,17 @@ export function CreateRoomForm() {
     },
   });
 
+  
+
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
+    const hashedPin = values.pin ? bcrypt.hashSync(values.pin, 10) : ""
+
     try {
       const room = await createRoomAction({
         ...values,
-        pin: values.isPrivate?values.pin || "":""
+        pin: values.isPrivate? hashedPin :""
       });
 
       toast({

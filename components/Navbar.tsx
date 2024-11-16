@@ -15,12 +15,12 @@ const Navbar = () => {
         <div>
         <GithubStarsButton />
         </div>
-        <div>
+        <div className='sm:block hidden'>
       <button
       onClick={() => {
         signIn();
       }}
-      className="Signin text-white dark:text-white">Signin</button>
+      className="Signin  text-white dark:text-white">Signin</button>
         </div>
       </div>
     </div>
